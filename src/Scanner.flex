@@ -17,11 +17,9 @@ InputCharacters = [^\r\n]
 WhiteSpace = {LineTerminators} | [ \t\f]
 
 
-
 %%
-
 <YYINITIAL> {
-
+    {DecimalInteger} {
+          return "salam";
+      }
 }
-
-
