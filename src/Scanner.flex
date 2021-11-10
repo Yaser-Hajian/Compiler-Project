@@ -30,8 +30,14 @@
 
 Digit = [0-9]
 Letter = [a-zA-Z]
-DecimalInteger = {Digit}+
 
+DecimalInteger = {Digit}+
+Hexadecimal = [0][X|x][0-9a-fA-F]+
+RealNumber = {Digit}+[\.]{Digit}*
+ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
+
+Underline ="_"
+Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
 LineTerminators = \r|\n|\r\n
 InputCharacters = [^\r\n]
