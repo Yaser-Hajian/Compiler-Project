@@ -61,5 +61,5 @@ Comment = {CommentType1} | {CommentType2}
     }  
 }
 [^] {
-    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext();
+    return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
     }
