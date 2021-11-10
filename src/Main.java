@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<String> tokens = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(new FileReader("./input.cool"));
+            Scanner scanner = new Scanner(new FileReader("src/input.cool"));
             while (true) {
                 String currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {

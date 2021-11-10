@@ -54,8 +54,11 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 %%
 <YYINITIAL> {
 
+    {ReservedWord} {
+          return "ReservedWord: " + yytext();
+      }
     {Comment} {
-        System.out.print("Comment: " + yytext());
+//        System.out.print("Comment: " + yytext());
         // return new Token("comment" , yytext());
         return "Comment: " + yytext();
     } 

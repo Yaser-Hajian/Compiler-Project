@@ -65,7 +65,11 @@ public class Scanner {
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\1\1\1\2\1\0\1\1\1\3\22\0\1\1"+
-    "\11\0\1\4\4\0\1\5\12\6\u01c6\0";
+    "\11\0\1\4\4\0\1\5\12\6\7\0\1\7\35\0"+
+    "\1\10\1\0\1\11\1\12\1\13\1\14\1\15\1\16"+
+    "\1\17\1\20\1\21\1\0\1\22\1\23\1\0\1\24"+
+    "\1\25\1\26\1\0\1\27\1\30\1\31\1\32\1\33"+
+    "\1\34\1\0\1\35\u0186\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[512];
@@ -92,11 +96,11 @@ public class Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\2\2\1\1\1\3\1\0\1\4\1\0"+
-    "\2\4";
+    "\1\0\1\1\2\2\1\1\1\3\16\1\1\0\1\4"+
+    "\6\0\1\5\15\0\2\4\35\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[11];
+    int [] result = new int[73];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -121,11 +125,19 @@ public class Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\7\0\7\0\16\0\25\0\34\0\43\0\52"+
-    "\0\61\0\7\0\70";
+    "\0\0\0\36\0\36\0\74\0\132\0\170\0\226\0\264"+
+    "\0\322\0\360\0\u010e\0\u012c\0\u014a\0\u0168\0\u0186\0\u01a4"+
+    "\0\u01c2\0\u01e0\0\u01fe\0\u021c\0\u023a\0\u0258\0\u0276\0\u0294"+
+    "\0\u02b2\0\u02d0\0\u02ee\0\u030c\0\36\0\u032a\0\u0348\0\u0366"+
+    "\0\u0384\0\u03a2\0\u03c0\0\u03de\0\u03fc\0\u041a\0\u0438\0\u0456"+
+    "\0\u0474\0\u0492\0\36\0\u04b0\0\u04ce\0\u04ec\0\u050a\0\u0528"+
+    "\0\u0546\0\u0564\0\u0582\0\u05a0\0\u05be\0\u05dc\0\u05fa\0\u0618"+
+    "\0\u0636\0\u0654\0\u0672\0\u0690\0\u06ae\0\u06cc\0\u06ea\0\u0708"+
+    "\0\u0726\0\u0744\0\u0762\0\u0780\0\u079e\0\u07bc\0\u07da\0\u07f8"+
+    "\0\u0816";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[11];
+    int [] result = new int[73];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -148,13 +160,34 @@ public class Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\2\3\1\4\1\2\1\5\1\6\11\0\1\3"+
-    "\10\0\1\7\1\10\7\0\1\6\4\7\1\11\2\7"+
-    "\2\10\1\12\1\13\3\10\4\7\1\11\1\12\1\7"+
-    "\2\0\1\12\4\0";
+    "\1\2\2\3\1\4\1\2\1\5\1\6\1\7\2\2"+
+    "\1\10\1\11\1\2\1\12\1\13\2\2\1\14\1\2"+
+    "\1\15\1\16\1\2\1\17\1\20\1\21\1\22\1\2"+
+    "\1\23\1\24\1\2\40\0\1\3\37\0\1\25\1\26"+
+    "\36\0\1\6\56\0\1\27\33\0\1\30\1\0\1\31"+
+    "\31\0\1\32\1\0\1\33\33\0\1\34\33\0\1\35"+
+    "\3\0\1\36\26\0\1\35\5\0\1\37\26\0\1\40"+
+    "\7\0\1\41\25\0\1\42\45\0\1\30\1\0\1\43"+
+    "\23\0\1\44\7\0\1\45\41\0\1\46\24\0\1\47"+
+    "\42\0\1\50\30\0\1\51\15\0\4\25\1\52\31\25"+
+    "\2\26\1\53\1\54\32\26\27\0\1\55\33\0\1\56"+
+    "\25\0\1\57\31\0\1\60\50\0\1\61\41\0\1\62"+
+    "\34\0\1\35\16\0\1\63\20\0\1\35\30\0\1\35"+
+    "\4\0\1\35\31\0\1\64\44\0\1\35\22\0\1\65"+
+    "\25\0\1\56\17\0\1\66\22\0\1\35\30\0\1\67"+
+    "\15\0\1\70\23\0\1\71\41\0\1\72\35\0\1\73"+
+    "\14\0\4\25\1\52\1\53\30\25\2\0\1\53\44\0"+
+    "\1\74\47\0\1\35\23\0\1\75\54\0\1\76\36\0"+
+    "\1\77\21\0\1\35\41\0\1\65\6\0\1\100\33\0"+
+    "\1\35\33\0\1\101\43\0\1\102\34\0\1\103\25\0"+
+    "\1\104\40\0\1\35\25\0\1\35\44\0\1\62\47\0"+
+    "\1\35\22\0\1\35\43\0\1\35\26\0\1\105\45\0"+
+    "\1\106\35\0\1\35\33\0\1\71\27\0\1\107\40\0"+
+    "\1\110\35\0\1\111\40\0\1\70\21\0\1\35\41\0"+
+    "\1\35\50\0\1\62\3\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[63];
+    int [] result = new int[2100];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -197,10 +230,11 @@ public class Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\11\3\1\1\0\1\1\1\0\1\11\1\1";
+    "\1\0\2\11\21\1\1\0\1\1\6\0\1\11\15\0"+
+    "\1\11\1\1\35\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[11];
+    int [] result = new int[73];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -686,12 +720,12 @@ public class Scanner {
     // return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
             }
             // fall through
-          case 5: break;
+          case 6: break;
           case 2:
             { 
             }
             // fall through
-          case 6: break;
+          case 7: break;
           case 3:
             { ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
@@ -699,14 +733,19 @@ public class Scanner {
         return "intConstant";
             }
             // fall through
-          case 7: break;
+          case 8: break;
           case 4:
-            { System.out.print("Comment: " + yytext());
+            { //        System.out.print("Comment: " + yytext());
         // return new Token("comment" , yytext());
         return "Comment: " + yytext();
             }
             // fall through
-          case 8: break;
+          case 9: break;
+          case 5:
+            { return "ReservedWord " + yytext();
+            }
+            // fall through
+          case 10: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
