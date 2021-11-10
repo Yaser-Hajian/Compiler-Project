@@ -10,17 +10,14 @@
 %line
 %column
 %function nextToken
-%type Token
+%type String
 
-// class Token {
+
+%{
+//     class Token {
 //     String type;
 //     Object value;
 // }
-%{
-    class Token {
-    String type;
-    Object value;
-}
     //dakhele class e scanner ezafe misheh.
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
@@ -47,25 +44,32 @@ WhiteSpace = {LineTerminators} | [ \t\f]
 CommentType1 = "/*" [^*] ~"*/" | "/*"~"*/"
 CommentType2 = "//" {InputCharacters}* {LineTerminators}? 
 Comment = {CommentType1} | {CommentType2}
- 
+
+ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
+                "static"|"class"|"for"|"rof"|"loop"|"pool"|
+                "while"|"break"|"continue"|"if"|"fi"|"else"|
+                "then"|"new"|"Array"|"return"|"in_string"|
+                "in_int"|"print"|"len"
+
 %%
 <YYINITIAL> {
 
     {Comment} {
         System.out.print("Comment: " + yytext());
-        return new Token("comment" , yytext());
-        // return "Comment: " + yytext();
+        // return new Token("comment" , yytext());
+        return "Comment: " + yytext();
     } 
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
-        return new Token("intConstant" , ICV);
-        // return "intConstant";
+        // return new Token("intConstant" , ICV);
+        return "intConstant";
       }
     {WhiteSpace} {
 
     }  
 }
 [^] {
-    return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
+    // return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
     }

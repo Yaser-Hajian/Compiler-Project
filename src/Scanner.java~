@@ -278,10 +278,10 @@ public class Scanner {
   private boolean zzEOFDone;
 
   /* user code: */
-//     class Token {
-//     String type;
-//     Object value;
-// }
+    class Token {
+    String type;
+    Object value;
+}
     //dakhele class e scanner ezafe misheh.
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
@@ -541,7 +541,7 @@ public class Scanner {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  public String nextToken() throws java.io.IOException {
+  public Token nextToken() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -682,8 +682,7 @@ public class Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
-    // return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+            { return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext();
             }
             // fall through
           case 5: break;
@@ -695,15 +694,15 @@ public class Scanner {
           case 3:
             { ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
-        // return new Token("intConstant" , ICV);
-        return "intConstant";
+        return new Token("intConstant" , ICV);
+        // return "intConstant";
             }
             // fall through
           case 7: break;
           case 4:
             { System.out.print("Comment: " + yytext());
-        // return new Token("comment" , yytext());
-        return "Comment: " + yytext();
+        return new Token("comment" , yytext());
+        // return "Comment: " + yytext();
             }
             // fall through
           case 8: break;
