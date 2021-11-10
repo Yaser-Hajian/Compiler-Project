@@ -14,10 +14,10 @@
 
 
 %{
-//     class Token {
+//     public class Token {
 //     String type;
 //     Object value;
-// }
+ }
     //dakhele class e scanner ezafe misheh.
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
@@ -52,16 +52,29 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
                 "in_int"|"print"|"len"
 
 %%
+
 <YYINITIAL> {
 
     {ReservedWord} {
           return "ReservedWord: " + yytext();
       }
+    {Identifier} {
+          return "Identifier: "+yytext();
+      }
     {Comment} {
 //        System.out.print("Comment: " + yytext());
         // return new Token("comment" , yytext());
         return "Comment: " + yytext();
-    } 
+    }
+    {ScientificNotation} {
+          return "ScientificNotation: "+yytext();
+      }
+    {Hexadecimal} {
+                return "Hexadecimal: "+yytext();
+            }
+    {RealNumber} {
+              return "RealNumber: "+yytext();
+          }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
