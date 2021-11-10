@@ -1,11 +1,22 @@
-
+// user code
+// mesle package ha
+// balaye code e scanner asli ezafe mishe.
 
 %%
-%class nextToken
+// Define macros and states
+%class Scanner
+%public
 %unicode
 %line
 %column
+%function nextToken
+%type String
 
+%{
+    public int ICV;
+    public double RCV;
+
+%}
 
 Digit = [0-9]
 Letter = [a-zA-Z]
@@ -22,4 +33,5 @@ WhiteSpace = {LineTerminators} | [ \t\f]
     {DecimalInteger} {
           return "salam";
       }
+      
 }
