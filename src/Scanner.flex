@@ -10,13 +10,17 @@
 %line
 %column
 %function nextToken
-%type String
+%type Token
 
 
 %{
-//     public class Token {
-//     String type;
-//     Object value;
+     public class Token {
+     String type;
+     Object value;
+     public Token(String type , Object value){
+         this.value=value;
+         this.type=type;
+     }
  }
     //dakhele class e scanner ezafe misheh.
     // tarif e variable va function va class dar inja tarif mishavad.
@@ -56,36 +60,41 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-          return "ReservedWord: " + yytext();
+//          return "ReservedWord: " + yytext();
+            return new Token("Reserved",yytext());
       }
     {Identifier} {
-          return "Identifier: "+yytext();
+//          return "Identifier: "+yytext();
+            return new Token("Identifiers",yytext());
       }
     {Comment} {
 //        System.out.print("Comment: " + yytext());
-        // return new Token("comment" , yytext());
-        return "Comment: " + yytext();
+         return new Token("Comment",yytext());
     }
     {ScientificNotation} {
-          return "ScientificNotation: "+yytext();
+//          return "ScientificNotation: "+yytext();
+            return new Token("Integer",yytext());
       }
     {Hexadecimal} {
-                return "Hexadecimal: "+yytext();
+//                return "Hexadecimal: "+yytext();
+                  return new Token("Integer",yytext());
             }
-    {RealNumber} {
-              return "RealNumber: "+yytext();
-          }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
         // return new Token("intConstant" , ICV);
-        return "intConstant";
+//        return "intConstant";
+        return new Token("Integer",ICV);
       }
+      {RealNumber} {
+      //              return "RealNumber: "+yytext();
+                      return new Token("Real",yytext());
+                }
     {WhiteSpace} {
 
     }  
 }
 [^] {
-    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
-    // return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+//    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
+     return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
     }

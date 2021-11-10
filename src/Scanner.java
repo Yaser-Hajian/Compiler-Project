@@ -355,10 +355,14 @@ public class Scanner {
   private boolean zzEOFDone;
 
   /* user code: */
-//     class Token {
-//     String type;
-//     Object value;
-// }
+     public class Token {
+     String type;
+     Object value;
+     public Token(String type , Object value){
+         this.value=value;
+         this.type=type;
+     }
+ }
     //dakhele class e scanner ezafe misheh.
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
@@ -618,7 +622,7 @@ public class Scanner {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  public String nextToken() throws java.io.IOException {
+  public Token nextToken() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -759,8 +763,8 @@ public class Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
-    // return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+            { //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
+     return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
             }
             // fall through
           case 10: break;
@@ -773,39 +777,44 @@ public class Scanner {
             { ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
         // return new Token("intConstant" , ICV);
-        return "intConstant";
+//        return "intConstant";
+        return new Token("Integer",ICV);
             }
             // fall through
           case 12: break;
           case 4:
-            { return "Identifier: "+yytext();
+            { //          return "Identifier: "+yytext();
+            return new Token("Identifiers",yytext());
             }
             // fall through
           case 13: break;
           case 5:
             { //        System.out.print("Comment: " + yytext());
-        // return new Token("comment" , yytext());
-        return "Comment: " + yytext();
+         return new Token("Comment",yytext());
             }
             // fall through
           case 14: break;
           case 6:
-            { return "RealNumber: "+yytext();
+            { //              return "RealNumber: "+yytext();
+                      return new Token("Real",yytext());
             }
             // fall through
           case 15: break;
           case 7:
-            { return "ReservedWord: " + yytext();
+            { //          return "ReservedWord: " + yytext();
+            return new Token("Reserved",yytext());
             }
             // fall through
           case 16: break;
           case 8:
-            { return "Hexadecimal: "+yytext();
+            { //                return "Hexadecimal: "+yytext();
+                  return new Token("Integer",yytext());
             }
             // fall through
           case 17: break;
           case 9:
-            { return "ScientificNotation: "+yytext();
+            { //          return "ScientificNotation: "+yytext();
+            return new Token("Integer",yytext());
             }
             // fall through
           case 18: break;

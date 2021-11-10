@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList<String> tokens = new ArrayList<>();
+        ArrayList<Scanner.Token> tokens = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new FileReader("src/input.cool"));
             while (true) {
-                String currentToken = scanner.nextToken();
+                Scanner.Token currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {
                     break;
                 }
-                if (!currentToken.startsWith("Error")) {
+                if (!currentToken.type.startsWith("Error")) {
                     tokens.add(currentToken);
                 }
-                System.out.println(currentToken);
+                System.out.println(currentToken.type + ": "+ currentToken.value);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);
