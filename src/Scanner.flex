@@ -11,7 +11,7 @@
 %column
 %function nextToken
 %type Token
-
+%state STRING
 
 %{
      public class Token {
@@ -38,6 +38,11 @@ RealNumber = {Digit}+[\.]{Digit}*
 ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
 
 Underline ="_"
+Assignment="<-"
+SpecialChar=[\\][n|t|r||\\|\'|\"]
+Operators= ([\+\*\-\>\<\/\!][\=]?|[\+\-\=\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}]|{Assignment})
+// dont know add '' to Op or not?? because read that for strings
+
 Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
 LineTerminators = \r|\n|\r\n
@@ -90,10 +95,27 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
       //              return "RealNumber: "+yytext();
                       return new Token("Real",yytext());
                 }
+    "\"" {
+        yybegin(STRING);return new Token("Operators and Punctuations",yytext())
+    }
+    {Operators} {
+        return new Token("Operators and Punctuations",yytext())
+    }
     {WhiteSpace} {
 
-    }  
+    }
+
 }
+<STRING> {
+    "\"" {
+        yybegin(YYINITIAL);
+        return new Token( "Operators and Punctuations",yytext());
+        }
+	{SpecialChar}   { return new Token("Special Characters",yytext()); }
+	.               { return new Token("String",yytext());}
+}
+
+
 [^] {
 //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
      return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
