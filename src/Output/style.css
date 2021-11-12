@@ -1,7 +1,10 @@
+body {
+  background-color: #383738;
+}
 .Reserved {
   color: #fc618d;
 }
-.Identifier {
+.Identifiers {
   color: #ffffff;
 }
 .Integer {
