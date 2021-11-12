@@ -43,6 +43,7 @@ SpecialChar=[\\][n|t|r||\\|\'|\"]
 Operators= ([\+\*\-\>\<\/\!][\=]?|[\+\-\=\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}]|{Assignment})
 // dont know add '' to Op or not?? because read that for strings
 
+
 Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
 LineTerminators = \r|\n|\r\n
@@ -87,15 +88,16 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     {RealNumber} {
                       return new Token("Real",yytext());
        }
-//    "\"" {
-//        yybegin(STRING);return new Token("Operators and Punctuations",yytext());
-//    }
     {Operators} {
-        return new Token("Operators and Punctuations",yytext());
+        return new Token("Operators",yytext());
     }
     {WhiteSpace} { }
 
+//    "\"" {
+ //        yybegin(STRING);return new Token("Operators and Punctuations",yytext());
+ //    }
 }
+
 //<STRING> {
 //    "\"" {
 //        yybegin(YYINITIAL);
@@ -112,5 +114,6 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 
 [^] {
 //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
-     return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+     System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
+     return new Token("Undefined", yytext() ) ;
     }

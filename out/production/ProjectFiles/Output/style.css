@@ -1,5 +1,5 @@
 body {
-  background-color: #383738;
+  background-color: #222222;
 }
 .Reserved {
   color: #fc618d;
@@ -24,13 +24,13 @@ body {
 .Comment {
   color: #69676c;
 }
-.Operator {
+.Operators {
   color: #00ffff;
 }
 .Undefined {
   color: #ff0000;
 }
 .count {
-  color: black;
+  color: white;
   font-weight: bold;
 }

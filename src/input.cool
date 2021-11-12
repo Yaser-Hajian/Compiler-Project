@@ -1,5 +1,5 @@
 //Main class
-class Main
+class Main {
     let int[] items;
     void printArray () {
         let int i;

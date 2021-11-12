@@ -26,9 +26,7 @@ public class Main {
                 if (scanner.yyatEOF()) {
                     break;
                 }
-                if (!currentToken.type.startsWith("Error")) {
-                    tokens.add(currentToken);
-                }
+                tokens.add(currentToken);
                 System.out.println(currentToken.type + ": "+ currentToken.value);
             }
             highlight(tokens,fileWriter);

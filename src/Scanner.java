@@ -796,7 +796,8 @@ public class Scanner {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             { //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
-     return new Token("Error" ,"Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext() ) ;
+     System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
+     return new Token("Undefined", yytext() ) ;
             }
             // fall through
           case 10: break;
@@ -806,7 +807,7 @@ public class Scanner {
             // fall through
           case 11: break;
           case 3:
-            { return new Token("Operators and Punctuations",yytext());
+            { return new Token("Operators",yytext());
             }
             // fall through
           case 12: break;
