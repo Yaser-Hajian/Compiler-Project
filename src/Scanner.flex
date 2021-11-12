@@ -65,55 +65,49 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-//          return "ReservedWord: " + yytext();
             return new Token("Reserved",yytext());
       }
     {Identifier} {
-//          return "Identifier: "+yytext();
             return new Token("Identifiers",yytext());
       }
     {Comment} {
-//        System.out.print("Comment: " + yytext());
          return new Token("Comment",yytext());
     }
     {ScientificNotation} {
-//          return "ScientificNotation: "+yytext();
             return new Token("Integer",yytext());
       }
     {Hexadecimal} {
-//                return "Hexadecimal: "+yytext();
                   return new Token("Integer",yytext());
-            }
+     }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
-        // return new Token("intConstant" , ICV);
-//        return "intConstant";
         return new Token("Integer",ICV);
       }
-      {RealNumber} {
-      //              return "RealNumber: "+yytext();
+    {RealNumber} {
                       return new Token("Real",yytext());
-                }
-    "\"" {
-        yybegin(STRING);return new Token("Operators and Punctuations",yytext())
-    }
+       }
+//    "\"" {
+//        yybegin(STRING);return new Token("Operators and Punctuations",yytext());
+//    }
     {Operators} {
-        return new Token("Operators and Punctuations",yytext())
+        return new Token("Operators and Punctuations",yytext());
     }
-    {WhiteSpace} {
-
-    }
+    {WhiteSpace} { }
 
 }
-<STRING> {
-    "\"" {
-        yybegin(YYINITIAL);
-        return new Token( "Operators and Punctuations",yytext());
-        }
-	{SpecialChar}   { return new Token("Special Characters",yytext()); }
-	.               { return new Token("String",yytext());}
-}
+//<STRING> {
+//    "\"" {
+//        yybegin(YYINITIAL);
+//        return new Token( "Operators and Punctuations",yytext());
+//        }
+//	{SpecialChar}   {
+//          return new Token("Special Characters",yytext());
+//      }
+//	.               {
+//          return new Token("String",yytext());
+//      }
+//}
 
 
 [^] {

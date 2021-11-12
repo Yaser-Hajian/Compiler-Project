@@ -1,5 +1,5 @@
 body {
-  background-color: #383738;
+  background-color: #222222;
 }
 .Reserved {
   color: #fc618d;
@@ -31,6 +31,6 @@ body {
   color: #ff0000;
 }
 .count {
-  color: black;
+  color: white;
   font-weight: bold;
 }

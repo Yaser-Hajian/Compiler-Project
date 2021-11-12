@@ -29,8 +29,6 @@ public class Main {
                 if (!currentToken.type.startsWith("Error")) {
                     tokens.add(currentToken);
                 }
-                System.out.println("---------------------");
-                System.out.println("size:"+tokens.size());
                 System.out.println(currentToken.type + ": "+ currentToken.value);
             }
             highlight(tokens,fileWriter);
