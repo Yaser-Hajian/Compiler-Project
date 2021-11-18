@@ -26,7 +26,8 @@
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
     public double RCV;
-
+    private StringBuffer string  = new StringBuffer();
+    public String stringValue = "";
 %}
 
 Digit = [0-9]
@@ -38,11 +39,9 @@ RealNumber = {Digit}+[\.]{Digit}*
 ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
 
 Underline ="_"
-Assignment="<-"
 SpecialChar=[\\][n|t|r||\\|\'|\"]
-Operators= ([\+\*\-\>\<\/\!][\=]?|[\+\-\=\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}]|{Assignment})
+Operators= ([\+\*\-\>\<\/\!\=][\=]?|[\+\-\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}])
 // dont know add '' to Op or not?? because read that for strings
-
 
 Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
@@ -93,23 +92,29 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     }
     {WhiteSpace} { }
 
-//    "\"" {
- //        yybegin(STRING);return new Token("Operators and Punctuations",yytext());
- //    }
+   "\"" {
+        yybegin(STRING);
+        return new Token("String",yytext());
+    }
 }
 
-//<STRING> {
-//    "\"" {
-//        yybegin(YYINITIAL);
-//        return new Token( "Operators and Punctuations",yytext());
-//        }
-//	{SpecialChar}   {
-//          return new Token("Special Characters",yytext());
-//      }
-//	.               {
-//          return new Token("String",yytext());
-//      }
-//}
+<STRING> {
+    \"  {
+          string.append(yytext());
+          stringValue = string.toString();
+          string = new StringBuffer();
+          yybegin(YYINITIAL);
+          return new Token("String",stringValue);
+    }
+    ^{SpecialChar}+  {
+          string.append(yytext());
+        return new Token("String",yytext());}
+    
+    {SpecialChar} {
+          string.append(yytext());
+        return new Token("Special Characters",yytext());
+    }
+}
 
 
 [^] {
