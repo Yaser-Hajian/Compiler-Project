@@ -39,7 +39,7 @@ RealNumber = {Digit}+[\.]{Digit}*
 ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
 
 Underline ="_"
-SpecialChar=[\\][n|t|r||\\|\'|\"]
+SpecialChar=[\\][ntr\\\'\"]
 Operators= ([\+\*\-\>\<\/\!\=][\=]?|[\+\-\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}])
 // dont know add '' to Op or not?? because read that for strings
 
@@ -65,6 +65,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
+            // System.out.println (yyline);
             return new Token("Reserved",yytext());
       }
     {Identifier} {
@@ -100,18 +101,14 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 
 <STRING> {
     \"  {
-          string.append(yytext());
-          stringValue = string.toString();
-          string = new StringBuffer();
           yybegin(YYINITIAL);
-          return new Token("String",stringValue);
+          return new Token("String",yytext());
     }
-    ^{SpecialChar}+  {
-          string.append(yytext());
-        return new Token("String",yytext());}
+     [^\n\r\"\\]+ {
+        return new Token("String",yytext());
+        }
     
-    {SpecialChar} {
-          string.append(yytext());
+    {SpecialChar}+ {
         return new Token("Special Characters",yytext());
     }
 }
