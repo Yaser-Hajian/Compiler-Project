@@ -831,7 +831,7 @@ public class Scanner {
           case 1:
             { //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
      System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
-     return new Token("Undefined", yytext() ) ;
+     return new Token("Undefined", yytext() , yyline) ;
             }
             // fall through
           case 14: break;
@@ -841,62 +841,62 @@ public class Scanner {
             // fall through
           case 15: break;
           case 3:
-            { return new Token("Operators",yytext());
+            { return new Token("Operators",yytext(), yyline);
             }
             // fall through
           case 16: break;
           case 4:
             { yybegin(STRING);
-        return new Token("String",yytext());
+        return new Token("String",yytext(), yyline);
             }
             // fall through
           case 17: break;
           case 5:
             { ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
-        return new Token("Integer",ICV);
+        return new Token("Integer",ICV, yyline);
             }
             // fall through
           case 18: break;
           case 6:
-            { return new Token("Identifiers",yytext());
+            { return new Token("Identifiers",yytext() , yyline);
             }
             // fall through
           case 19: break;
           case 7:
-            { return new Token("String",yytext());
+            { return new Token("String",yytext(), yyline);
             }
             // fall through
           case 20: break;
           case 8:
             { yybegin(YYINITIAL);
-          return new Token("String",yytext());
+          return new Token("String",yytext(), yyline);
             }
             // fall through
           case 21: break;
           case 9:
-            { return new Token("Comment",yytext());
+            { return new Token("Comment",yytext() , yyline);
             }
             // fall through
           case 22: break;
           case 10:
-            { return new Token("Real",yytext());
+            { return new Token("Real",yytext(), yyline);
             }
             // fall through
           case 23: break;
           case 11:
             { // System.out.println (yyline);
-            return new Token("Reserved",yytext());
+            return new Token("Reserved",yytext() , yyline);
             }
             // fall through
           case 24: break;
           case 12:
-            { return new Token("Special Characters",yytext());
+            { return new Token("Special Characters",yytext(), yyline);
             }
             // fall through
           case 25: break;
           case 13:
-            { return new Token("Integer",yytext());
+            { return new Token("Integer",yytext(), yyline);
             }
             // fall through
           case 26: break;

@@ -32,12 +32,10 @@ public class Main {
             ArrayList<Scanner.Token> tokens = map_token_to_line_number.get(i);
             String writed = "<p>";
             int lineNumber = i+1;
-            System.out.println(i);
             writed += "<span class=\"count\">"+lineNumber + "- </span> ";
             for (int j = 0; j < tokens.size(); j++) {
                 Scanner.Token token = tokens.get(j);
                 writed += "<span class=\" " +token.type+  "\">"+ token.value+"</span>";
-                System.out.println(token.value);
             }
             writed += "</p>";
             fileWriter.write(writed);

@@ -93,7 +93,9 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     {Operators} {
         return new Token("Operators",yytext(), yyline);
     }
-    {WhiteSpace} { }
+    {WhiteSpace} {
+          return new Token("WhiteSpace",yytext(), yyline);
+       }
 
    "\"" {
         yybegin(STRING);
