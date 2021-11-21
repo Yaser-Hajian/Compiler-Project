@@ -41,7 +41,7 @@ RealNumber = {Digit}+[\.]{Digit}*
 ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
 
 Underline ="_"
-SpecialChar=[\\][n|t|r||\\|\'|\"]
+SpecialChar=[\\][ntr\\\'\"]
 Operators= ([\+\*\-\>\<\/\!\=][\=]?|[\+\-\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}])
 // dont know add '' to Op or not?? because read that for strings
 
@@ -67,54 +67,50 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-            return new Token("Reserved",yytext());
+            // System.out.println (yyline);
+            return new Token("Reserved",yytext() , yyline);
       }
     {Identifier} {
-            return new Token("Identifiers",yytext());
+            return new Token("Identifiers",yytext() , yyline);
       }
     {Comment} {
-         return new Token("Comment",yytext());
+         return new Token("Comment",yytext() , yyline);
     }
     {ScientificNotation} {
-            return new Token("Integer",yytext());
+        return new Token("Integer",yytext(), yyline);
       }
     {Hexadecimal} {
-                  return new Token("Integer",yytext());
+        return new Token("Integer",yytext(), yyline);
      }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
-        return new Token("Integer",ICV);
+        return new Token("Integer",ICV, yyline);
       }
     {RealNumber} {
-                      return new Token("Real",yytext());
+        return new Token("Real",yytext(), yyline);
        }
     {Operators} {
-        return new Token("Operators",yytext());
+        return new Token("Operators",yytext(), yyline);
     }
     {WhiteSpace} { }
 
    "\"" {
         yybegin(STRING);
-        return new Token("String",yytext());
+        return new Token("String",yytext(), yyline);
     }
 }
 
 <STRING> {
     \"  {
-          string.append(yytext());
-          stringValue = string.toString();
-          string = new StringBuffer();
           yybegin(YYINITIAL);
-          return new Token("String",stringValue);
+          return new Token("String",yytext(), yyline);
     }
-    ^{SpecialChar}+  {
-          string.append(yytext());
-        return new Token("String",yytext());}
-    
-    {SpecialChar} {
-          string.append(yytext());
-        return new Token("Special",yytext());
+     [^\n\r\"\\]+ {
+        return new Token("String",yytext(), yyline);
+        }
+    {SpecialChar}+ {
+        return new Token("Special Characters",yytext(), yyline);
     }
 }
 
@@ -122,5 +118,5 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 [^] {
 //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
      System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
-     return new Token("Undefined", yytext() ) ;
+     return new Token("Undefined", yytext() , yyline) ;
     }
