@@ -35,7 +35,13 @@ public class Main {
             writed += "<span class=\"count\">"+lineNumber + "- </span> ";
             for (int j = 0; j < tokens.size(); j++) {
                 Scanner.Token token = tokens.get(j);
-                writed += "<span class=\" " +token.type+  "\">"+ token.value+"</span>";
+                if (token.type.equals("WhiteSpace") ){
+                    String space = "&nbsp";
+                    writed += "<span>"+ space +"</span>";
+                }else {
+                    writed += "<span class=\" " +token.type+  "\">"+ token.value+"</span>";
+                }
+
             }
             writed += "</p>";
             fileWriter.write(writed);
