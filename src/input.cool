@@ -20,7 +20,7 @@ class Main {
         print ("Please enter random numbers! \twe just print them!");
         print ("Max numbers counter: 100, \n(Enter \"-1\"to end sooner.)");
         for (i=0 ; i < arrayLenInHex; i = i +1)
-            let int X;
+            let int x;
             x = in_int();
             if (x == -1) then
                 break;

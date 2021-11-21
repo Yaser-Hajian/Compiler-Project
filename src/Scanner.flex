@@ -17,9 +17,11 @@
      public class Token {
      String type;
      Object value;
-     public Token(String type , Object value){
+     int lineNumber;
+     public Token(String type , Object value , int lineNumber){
          this.value=value;
          this.type=type;
+         this.lineNumber=lineNumber;
      }
  }
     //dakhele class e scanner ezafe misheh.
@@ -112,7 +114,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     
     {SpecialChar} {
           string.append(yytext());
-        return new Token("Special Characters",yytext());
+        return new Token("Special",yytext());
     }
 }
 
