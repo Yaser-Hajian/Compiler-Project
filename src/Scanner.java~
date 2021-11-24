@@ -836,7 +836,7 @@ public class Scanner {
             // fall through
           case 14: break;
           case 2:
-            { 
+            { return new Token("WhiteSpace",yytext(), yyline);
             }
             // fall through
           case 15: break;

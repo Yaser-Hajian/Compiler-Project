@@ -8,12 +8,6 @@ import java.util.Map;
 
 public class Main {
     public static void highlight(ArrayList<Scanner.Token> arrayList , FileWriter fileWriter) throws IOException{
-//        for (int i = 0; i < arrayList.size(); i++) {
-//            int lineNumber = i+1;
-//            Scanner.Token token = arrayList.get(i);
-//            fileWriter.write("<p class=\"" +token.type+ "\">" +"<span class=\"count\">"+lineNumber + "- "+"</span>"+ token.value+"</p>");
-//        }
-
 
         Map<Integer , ArrayList<Scanner.Token>  >map_token_to_line_number=new HashMap<>();
 
@@ -56,7 +50,7 @@ public class Main {
         ArrayList<Scanner.Token> tokens = new ArrayList<>();
         FileWriter fileWriter = new FileWriter("src/Output/output.html" , true);
         try {
-            Scanner scanner = new Scanner(new FileReader("src/input.cool"));
+            Scanner scanner = new Scanner(new FileReader("src/input2.cool"));
             while (true) {
                 Scanner.Token currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {
