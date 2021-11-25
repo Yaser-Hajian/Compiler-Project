@@ -35,14 +35,13 @@ Digit = [0-9]
 Letter = [a-zA-Z]
 
 DecimalInteger = {Digit}+
-Hexadecimal = [0][X|x][0-9a-fA-F]+
+Hexadecimal = [0][Xx][0-9a-fA-F]+
 RealNumber = {Digit}+[\.]{Digit}*
-ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
+ScientificNotation =({DecimalInteger}|{RealNumber})[eE][\-\+]?{Digit}+
 
 Underline ="_"
 SpecialChar=[\\][ntr\\\'\"]
 Operators= ([\+\*\-\>\<\/\!\=][\=]?|[\+\-\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}])
-// dont know add '' to Op or not?? because read that for strings
 
 Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
@@ -66,7 +65,6 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-            // System.out.println (yyline);
             return new Token("Reserved",yytext() , yyline);
       }
     {Identifier} {
@@ -94,7 +92,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     }
     {WhiteSpace} {
           return new Token("WhiteSpace",yytext(), yyline);
-       }
+    }
 
 
    "\"" {
@@ -111,8 +109,13 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
      [^\n\r\"\\]+ {
         return new Token("String",yytext(), yyline);
         }
-    {SpecialChar}+ {
+    {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);
+    }
+    {LineTerminators}{
+        yybegin(YYINITIAL);
+        System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
+        return new Token("Undefined", yytext() , yyline) ;   
     }
 }
 
