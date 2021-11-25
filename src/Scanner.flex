@@ -104,19 +104,14 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
           yybegin(YYINITIAL);
           return new Token("String",yytext(), yyline);
     }
-    [ \t\f] {
+    {WhiteSpace} {
         return new Token("WhiteSpace",yytext(), yyline);
     }
-     [^\n\r\"\\] {
+    [^\n\r\"\\] {
         return new Token("String",yytext(), yyline);
         }
     {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);
-    }
-    {LineTerminators} {
-        yybegin(YYINITIAL);
-        System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
-        return new Token("Undefined", yytext() , yyline) ;   
     }
 }
 
