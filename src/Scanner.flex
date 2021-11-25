@@ -66,35 +66,33 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 
     {ReservedWord} {
             return new Token("Reserved",yytext() , yyline);
-      }
+    }
     {Identifier} {
             return new Token("Identifiers",yytext() , yyline);
-      }
+    }
     {Comment} {
          return new Token("Comment",yytext() , yyline);
     }
     {ScientificNotation} {
         return new Token("Integer",yytext(), yyline);
-      }
+    }
     {Hexadecimal} {
         return new Token("Integer",yytext(), yyline);
-     }
+    }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
         return new Token("Integer",ICV, yyline);
-      }
+    }
     {RealNumber} {
         return new Token("Real",yytext(), yyline);
-       }
+    }
     {Operators} {
         return new Token("Operators",yytext(), yyline);
     }
     {WhiteSpace} {
           return new Token("WhiteSpace",yytext(), yyline);
     }
-
-
    "\"" {
         yybegin(STRING);
         return new Token("String",yytext(), yyline);
@@ -106,13 +104,16 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
           yybegin(YYINITIAL);
           return new Token("String",yytext(), yyline);
     }
-     [^\n\r\"\\]+ {
+    [ \t\f] {
+        return new Token("WhiteSpace",yytext(), yyline);
+    }
+     [^\n\r\"\\] {
         return new Token("String",yytext(), yyline);
         }
     {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);
     }
-    {LineTerminators}{
+    {LineTerminators} {
         yybegin(YYINITIAL);
         System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
         return new Token("Undefined", yytext() , yyline) ;   
