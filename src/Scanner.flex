@@ -28,8 +28,7 @@
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
     public double RCV;
-    private StringBuffer string  = new StringBuffer();
-    public String stringValue = "";
+
 %}
 
 Digit = [0-9]
@@ -96,6 +95,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     {WhiteSpace} {
           return new Token("WhiteSpace",yytext(), yyline);
        }
+
 
    "\"" {
         yybegin(STRING);

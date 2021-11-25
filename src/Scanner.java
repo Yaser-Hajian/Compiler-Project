@@ -432,8 +432,7 @@ public class Scanner {
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
     public double RCV;
-    private StringBuffer string  = new StringBuffer();
-    public String stringValue = "";
+
 
 
   /**

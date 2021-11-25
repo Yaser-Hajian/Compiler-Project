@@ -32,6 +32,9 @@ public class Main {
                 if (token.type.equals("WhiteSpace") ){
                     String space = "&nbsp";
                     writed += "<span>"+ space +"</span>";
+                }else if (token.type.equals("Tab")){
+                    String space = "&nbsp &nbsp &nbsp &nbsp";
+                    writed += "<span>"+ space +"</span>";
                 }else {
                     writed += "<span class=\" " +token.type+  "\">"+ token.value+"</span>";
                 }
@@ -50,7 +53,7 @@ public class Main {
         ArrayList<Scanner.Token> tokens = new ArrayList<>();
         FileWriter fileWriter = new FileWriter("src/Output/output.html" , true);
         try {
-            Scanner scanner = new Scanner(new FileReader("src/input2.cool"));
+            Scanner scanner = new Scanner(new FileReader("src/input.cool"));
             while (true) {
                 Scanner.Token currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {
