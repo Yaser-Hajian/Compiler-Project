@@ -74,7 +74,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
          return new Token("Comment",yytext() , yyline);
     }
     {ScientificNotation} {
-        return new Token("Integer",yytext(), yyline);
+        return new Token("Real",yytext(), yyline);
     }
     {Hexadecimal} {
         return new Token("Integer",yytext(), yyline);
@@ -85,7 +85,9 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
         return new Token("Integer",ICV, yyline);
     }
     {RealNumber} {
-        return new Token("Real",yytext(), yyline);
+        RCV = Double.parseDouble(yytext());
+        System.out.print("RealNumber: "+ RCV + " ");
+        return new Token("Real", RCV, yyline);
     }
     {Operators} {
         return new Token("Operators",yytext(), yyline);
