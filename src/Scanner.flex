@@ -4,7 +4,7 @@
 
 %%
 // Define macros and states
-%class Scanner
+%class My_Scanner
 %public
 %unicode
 %line

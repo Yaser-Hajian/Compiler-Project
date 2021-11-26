@@ -9,7 +9,7 @@
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
-public class Scanner {
+public class My_Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -435,7 +435,7 @@ public class Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  public Scanner(java.io.Reader in) {
+  public My_Scanner(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -864,7 +864,7 @@ public class Scanner {
           case 21: break;
           case 8:
             { yybegin(YYINITIAL);
-          return new Token("String",yytext(), yyline);
+        return new Token("String",yytext(), yyline);
             }
             // fall through
           case 22: break;
@@ -891,7 +891,7 @@ public class Scanner {
             // fall through
           case 26: break;
           case 13:
-            { String sNumber = yytext();  
+            { String sNumber = yytext();
         RCV = Double.parseDouble(sNumber);
         System.out.println("ScientificNotation: "+ sNumber + " " + "with decimal value of "+ RCV);
         return new Token("Real",sNumber, yyline);

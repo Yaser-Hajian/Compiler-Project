@@ -7,28 +7,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    public static void highlight(ArrayList<Scanner.Token> arrayList , FileWriter fileWriter) throws IOException{
+    public static void highlight(ArrayList<My_Scanner.Token> arrayList , FileWriter fileWriter) throws IOException{
 
-        Map<Integer , ArrayList<Scanner.Token>  >map_token_to_line_number=new HashMap<>();
+        Map<Integer , ArrayList<My_Scanner.Token>  >map_token_to_line_number=new HashMap<>();
 
         for (int i = 0; i < arrayList.size(); i++) {
-            Scanner.Token token = arrayList.get(i);
+            My_Scanner.Token token = arrayList.get(i);
             int line_number = token.lineNumber;
 
             if (!map_token_to_line_number.containsKey(line_number)){
-                map_token_to_line_number.put(line_number , new ArrayList<Scanner.Token>());
+                map_token_to_line_number.put(line_number , new ArrayList<My_Scanner.Token>());
             }
             map_token_to_line_number.get(line_number).add(token);
 
 
         }
         for (int i : map_token_to_line_number.keySet()) {
-            ArrayList<Scanner.Token> tokens = map_token_to_line_number.get(i);
+            ArrayList<My_Scanner.Token> tokens = map_token_to_line_number.get(i);
             String writed = "<p>";
             int lineNumber = i+1;
             writed += "<span class=\"count\">"+lineNumber + "- </span> ";
             for (int j = 0; j < tokens.size(); j++) {
-                Scanner.Token token = tokens.get(j);
+                My_Scanner.Token token = tokens.get(j);
                 if (token.type.equals("WhiteSpace") ) {
                     if (token.type.equals("\t")) {
                         String space = "&nbsp &nbsp &nbsp &nbsp";
@@ -52,12 +52,12 @@ public class Main {
         fileWriter.close();
     }
     public static void main(String[] args) throws IOException {
-        ArrayList<Scanner.Token> tokens = new ArrayList<>();
+        ArrayList<My_Scanner.Token> tokens = new ArrayList<>();
         FileWriter fileWriter = new FileWriter("src/Output/output.html" , true);
         try {
-            Scanner scanner = new Scanner(new FileReader("src/input2.cool"));
+            My_Scanner scanner = new My_Scanner(new FileReader("src/input.cool"));
             while (true) {
-                Scanner.Token currentToken = scanner.nextToken();
+                My_Scanner.Token currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {
                     break;
                 }
