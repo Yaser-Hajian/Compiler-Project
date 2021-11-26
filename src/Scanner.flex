@@ -65,35 +65,41 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-            return new Token("Reserved",yytext() , yyline);
+        return new Token("Reserved",yytext() , yyline);
     }
     {Identifier} {
-            return new Token("Identifiers",yytext() , yyline);
+        return new Token("Identifiers",yytext() , yyline);
     }
     {Comment} {
-         return new Token("Comment",yytext() , yyline);
+        return new Token("Comment",yytext() , yyline);
     }
     {ScientificNotation} {
-        return new Token("Real",yytext(), yyline);
+        String sNumber = yytext();
+        RCV = Double.parseDouble(sNumber);
+        System.out.println("ScientificNotation: "+ sNumber + " " + "with decimal value of "+ RCV);
+        return new Token("Real",sNumber, yyline);
     }
     {Hexadecimal} {
-        return new Token("Integer",yytext(), yyline);
+        String hex_number = yytext();
+        ICV = Integer.parseInt(hex_number.substring(2) , 16);
+        System.out.println("HexNumber: "+ hex_number + " " + "with decimal value of "+ ICV);
+        return new Token("Integer",hex_number, yyline);
     }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
-        System.out.print("Number: "+ ICV + " ");
+        System.out.println("Number: "+ ICV + " ");
         return new Token("Integer",ICV, yyline);
     }
     {RealNumber} {
         RCV = Double.parseDouble(yytext());
-        System.out.print("RealNumber: "+ RCV + " ");
+        System.out.println("RealNumber: "+ RCV + " ");
         return new Token("Real", RCV, yyline);
     }
     {Operators} {
         return new Token("Operators",yytext(), yyline);
     }
     {WhiteSpace} {
-          return new Token("WhiteSpace",yytext(), yyline);
+        return new Token("WhiteSpace",yytext(), yyline);
     }
    "\"" {
         yybegin(STRING);
@@ -103,8 +109,8 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 
 <STRING> {
     \"  {
-          yybegin(YYINITIAL);
-          return new Token("String",yytext(), yyline);
+        yybegin(YYINITIAL);
+        return new Token("String",yytext(), yyline);
     }
     {WhiteSpace} {
         return new Token("WhiteSpace",yytext(), yyline);

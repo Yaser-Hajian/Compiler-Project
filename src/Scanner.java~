@@ -847,7 +847,7 @@ public class Scanner {
           case 18: break;
           case 5:
             { ICV = Integer.parseInt(yytext());
-        System.out.print("Number: "+ ICV + " ");
+        System.out.println("Number: "+ ICV + " ");
         return new Token("Integer",ICV, yyline);
             }
             // fall through
@@ -875,7 +875,7 @@ public class Scanner {
           case 23: break;
           case 10:
             { RCV = Double.parseDouble(yytext());
-        System.out.print("RealNumber: "+ RCV + " ");
+        System.out.println("RealNumber: "+ RCV + " ");
         return new Token("Real", RCV, yyline);
             }
             // fall through
@@ -891,12 +891,18 @@ public class Scanner {
             // fall through
           case 26: break;
           case 13:
-            { return new Token("Real",yytext(), yyline);
+            { String sNumber = yytext();  
+        RCV = Double.parseDouble(sNumber);
+        System.out.println("ScientificNotation: "+ sNumber + " " + "with decimal value of "+ RCV);
+        return new Token("Real",sNumber, yyline);
             }
             // fall through
           case 27: break;
           case 14:
-            { return new Token("Integer",yytext(), yyline);
+            { String hex_number = yytext();
+        ICV = Integer.parseInt(hex_number.substring(2) , 16);
+        System.out.println("HexNumber: "+ hex_number + " " + "with decimal value of "+ ICV);
+        return new Token("Integer",hex_number, yyline);
             }
             // fall through
           case 28: break;
