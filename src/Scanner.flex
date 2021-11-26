@@ -35,14 +35,13 @@ Digit = [0-9]
 Letter = [a-zA-Z]
 
 DecimalInteger = {Digit}+
-Hexadecimal = [0][X|x][0-9a-fA-F]+
+Hexadecimal = [0][Xx][0-9a-fA-F]+
 RealNumber = {Digit}+[\.]{Digit}*
-ScientificNotation =({DecimalInteger}|{RealNumber})[e|E][\-|\+]{Digit}+
+ScientificNotation =({DecimalInteger}|{RealNumber})[eE][\-\+]?{Digit}+
 
 Underline ="_"
 SpecialChar=[\\][ntr\\\'\"]
 Operators= ([\+\*\-\>\<\/\!\=][\=]?|[\+\-\|\&]{2}|[\%\|\&\^\.\,\;\[\]\(\)\{\}])
-// dont know add '' to Op or not?? because read that for strings
 
 Identifier = {Letter}({Letter}|{Digit}|{Underline}){0,30}
 
@@ -66,37 +65,34 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-            // System.out.println (yyline);
             return new Token("Reserved",yytext() , yyline);
-      }
+    }
     {Identifier} {
             return new Token("Identifiers",yytext() , yyline);
-      }
+    }
     {Comment} {
          return new Token("Comment",yytext() , yyline);
     }
     {ScientificNotation} {
         return new Token("Integer",yytext(), yyline);
-      }
+    }
     {Hexadecimal} {
         return new Token("Integer",yytext(), yyline);
-     }
+    }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.print("Number: "+ ICV + " ");
         return new Token("Integer",ICV, yyline);
-      }
+    }
     {RealNumber} {
         return new Token("Real",yytext(), yyline);
-       }
+    }
     {Operators} {
         return new Token("Operators",yytext(), yyline);
     }
     {WhiteSpace} {
           return new Token("WhiteSpace",yytext(), yyline);
-       }
-
-
+    }
    "\"" {
         yybegin(STRING);
         return new Token("String",yytext(), yyline);
@@ -108,10 +104,13 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
           yybegin(YYINITIAL);
           return new Token("String",yytext(), yyline);
     }
-     [^\n\r\"\\]+ {
+    {WhiteSpace} {
+        return new Token("WhiteSpace",yytext(), yyline);
+    }
+    [^\n\r\"\\] {
         return new Token("String",yytext(), yyline);
         }
-    {SpecialChar}+ {
+    {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);
     }
 }
