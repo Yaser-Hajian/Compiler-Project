@@ -81,7 +81,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
                 "static"|"class"|"for"|"rof"|"loop"|"pool"|
                 "while"|"break"|"continue"|"if"|"fi"|"else"|
                 "then"|"new"|"Array"|"return"|"in_string"|
-                "in_int"|"print"|"len"
+                "in_int"|"print"|"len"|"true"|"false"
 
 %%
 
