@@ -31,6 +31,9 @@
           if (current.value == null){
               return null;
           }
+          if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){
+              return null;
+          }
           if (current.type.equals("Reserved")){
               return current.value;
           }
@@ -126,14 +129,14 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     }
    "\"" {
         yybegin(STRING);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
 }
 
 <STRING> {
     \"  {
         yybegin(YYINITIAL);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
     {WhiteSpace} {
         return new Token("WhiteSpace",yytext(), yyline);
