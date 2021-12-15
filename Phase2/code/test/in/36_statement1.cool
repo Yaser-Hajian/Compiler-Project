@@ -1,0 +1,11 @@
+class main {
+
+	void method(){
+		
+		let int a ;
+		let int b
+		print(a+b);
+	}
+
+
+}

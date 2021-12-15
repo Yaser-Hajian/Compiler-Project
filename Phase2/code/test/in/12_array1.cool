@@ -1,0 +1,6 @@
+class main {
+
+	int method () {
+		let INT[] items;
+	}
+}

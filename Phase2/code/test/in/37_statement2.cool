@@ -1,0 +1,11 @@
+class main {
+
+	void method(){
+		
+		let string input;
+		{
+			input = in_string();
+		}
+	
+	}
+}

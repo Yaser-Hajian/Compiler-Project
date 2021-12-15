@@ -1,0 +1,14 @@
+class InOut {
+    void printer_00to00_console () {
+		print (1);
+		print(1.2);
+		print(-2.3);
+		print ( "hello world" );
+		print(123 + 345);
+		print(123.32+1);
+
+		x = in_int();
+		y = in_string();
+		return;
+    }
+}

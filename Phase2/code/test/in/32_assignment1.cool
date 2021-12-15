@@ -1,0 +1,7 @@
+class main {
+
+	void method(){
+		let int a = 123;
+	}
+
+}

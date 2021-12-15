@@ -1,0 +1,6 @@
+class foo {
+		let int a;
+		void b () {}
+		let int c;
+}
+class main {}

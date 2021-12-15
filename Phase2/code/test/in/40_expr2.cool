@@ -1,0 +1,9 @@
+class Main {
+	int computeDummy () {
+		let real c;
+		c = (c++) - c + 0 / 0 * 2;
+		return c + 4;
+	}
+}
+
+

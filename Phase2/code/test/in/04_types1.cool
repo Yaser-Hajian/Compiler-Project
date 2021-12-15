@@ -1,0 +1,8 @@
+class className {
+	let int a;
+	let bool b;
+	let real c;
+	let string d;
+
+	void funcName(){}
+}

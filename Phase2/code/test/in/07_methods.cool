@@ -1,0 +1,14 @@
+class AClass {
+
+    int func() {
+        let int magicNumber;
+        return magicNumber;
+    }
+
+    MyType methodname1(VarType var1) {
+    }
+
+    string methodname2(int a, VarType2 b) {
+        print(a);
+    }
+}

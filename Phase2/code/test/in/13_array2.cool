@@ -1,0 +1,10 @@
+class main {
+
+	void main () {
+		let int[] numbers;
+		numbers = new Array(int, a + b );
+		let item[] items;
+		items = new Array(item, 13);
+		items[] = len(items);
+	}
+}

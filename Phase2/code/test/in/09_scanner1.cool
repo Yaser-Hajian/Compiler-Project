@@ -1,0 +1,5 @@
+class className {
+	let int a;
+	let bool 2b;
+	let string d;
+}

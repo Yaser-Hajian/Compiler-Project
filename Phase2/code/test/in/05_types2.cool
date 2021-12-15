@@ -1,0 +1,11 @@
+class A {
+    let foo int;
+
+    let bar real;
+
+    let str string;
+
+    let baz bool;
+
+    let student st;
+}

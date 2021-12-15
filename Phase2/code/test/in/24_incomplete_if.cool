@@ -1,0 +1,12 @@
+class Main {
+    int main() {
+        let int i;
+        i = 0;
+
+        if (i == 1) then
+            print(i);
+        // fi
+        
+        return 0;
+    }
+}

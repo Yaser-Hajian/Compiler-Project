@@ -1,0 +1,9 @@
+class main {
+
+	void method(){
+		let int a;
+		let int b;
+		a , b = 12;		
+	}
+
+}

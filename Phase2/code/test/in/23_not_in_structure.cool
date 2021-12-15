@@ -1,0 +1,16 @@
+int sum(int a, int b) {
+    return a + b;
+}
+
+class Main {
+    int main() {
+        let int i;
+        i = 0;
+
+        if i == 0 then
+            print(i);
+        fi 
+
+        return 0;
+    }
+}
