@@ -425,8 +425,21 @@ public class My_Scanner implements Lexical {
     }
     public String nextToken(){
       try{
-          Token current = next();
-          return current.value == null ? "$" : current.value;
+          Token current = My_Next_Token();
+          if (current.value == null){
+              return null;
+          }
+          if (current.type.equals("Reserved")){
+              return current.value;
+          }
+          if (current.type.equals("Operators")) {
+              if (current.value.equals(",")){
+                  return "comma";
+              }else {
+                  return current.value;
+              }
+          }
+          return current.type;
       }catch (Exception e){
           e.printStackTrace();
           return null;

@@ -34,12 +34,12 @@
           if (current.type.equals("Reserved")){
               return current.value;
           }
-          if (current.value.equals("(") || current.value.equals(")") ||
-              current.value.equals("{") || current.value.equals("}") ||
-              current.value.equals("[") || current.value.equals("]") ||
-              current.value.equals("!") || current.value.equals("="))
-          {
-              return current.value;
+          if (current.type.equals("Operators")) {
+              if (current.value.equals(",")){
+                  return "comma";
+              }else {
+                  return current.value;
+              }
           }
           return current.type;
       }catch (Exception e){
