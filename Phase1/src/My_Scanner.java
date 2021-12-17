@@ -858,7 +858,7 @@ public class My_Scanner {
             // fall through
           case 20: break;
           case 7:
-            { return new Token("StringLiteral",yytext(), yyline);
+            { return new Token("String",yytext(), yyline);
             }
             // fall through
           case 21: break;

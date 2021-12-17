@@ -145,7 +145,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
         return new Token("WhiteSpace",yytext(), yyline);
     }
     [^\n\r\"\\] {
-        return new Token("StringLiteral",yytext(), yyline);
+        return new Token("String",yytext(), yyline);
         }
     {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);

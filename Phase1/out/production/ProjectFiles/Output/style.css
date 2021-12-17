@@ -20,6 +20,9 @@ p {
 .StringLiteral {
   color: #fce566;
 }
+.String {
+  color: #fce566;
+}
 .Special {
   color: #ee82ee;
   font-style: italic;
