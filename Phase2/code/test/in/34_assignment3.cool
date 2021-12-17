@@ -1,0 +1,9 @@
+class foo {
+	let int bar;
+}
+class Main {
+	void main(){ 
+		let foo item;
+		item.bar = 120;
+	}
+}

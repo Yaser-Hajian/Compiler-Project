@@ -1,0 +1,25 @@
+class student{
+	let real[] grades;
+	let real average(){
+		let real sum;
+		sum = 0;
+		grades = new Array(real,20);
+		let int i;
+		for(i=0;i<len(grades);i++){
+			sum = sum + grades[i];
+		}	
+		return sum/len(grades);
+	}
+	
+}
+class Main{
+
+	int main(){
+	
+		let student s;
+		print(s.average());
+	}
+}
+
+
+}

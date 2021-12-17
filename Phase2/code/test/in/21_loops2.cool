@@ -1,0 +1,19 @@
+class ALoopClass{
+
+	int LOOP_FUNC () {
+		let int i;
+		i=0;
+		while (i>12)loop
+			i++;
+			
+			if(i==5)then
+				continue;
+			fi
+			if ( i == 10 ) then
+				break;		
+			fi
+		pool	
+	}
+
+}
+

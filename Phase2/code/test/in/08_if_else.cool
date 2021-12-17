@@ -1,0 +1,14 @@
+class IFEXAMPLE {
+
+    bool ifExample() {
+        if (x > 20) then
+            condition = false;
+        fi
+        if (x != y) then
+            x = 2;
+        else
+            y = 1;
+        fi
+        return true;
+    }
+}

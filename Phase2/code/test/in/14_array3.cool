@@ -1,0 +1,18 @@
+class Par {
+	let int length;
+}
+
+class Child{
+	let int value;
+	let Par par;
+}
+
+class Main {
+	
+    int main() {
+		let Child[] list;
+		list = new Array(Child, list.par.length);
+		print(list[32]);
+        return 0;
+    }
+}

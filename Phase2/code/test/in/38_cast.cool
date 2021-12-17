@@ -1,0 +1,13 @@
+class Main {
+
+	int Func () {
+		let int b;
+		let int c;
+		let real r;
+		r = 2.45;
+		c = 2 + (int) r;
+		b = 3 - (int) 3.14;
+	}
+}
+
+

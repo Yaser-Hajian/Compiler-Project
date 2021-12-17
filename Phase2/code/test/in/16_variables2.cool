@@ -1,0 +1,4 @@
+class main {
+    let real[]  a;
+    let bool[]  Bool;
+}

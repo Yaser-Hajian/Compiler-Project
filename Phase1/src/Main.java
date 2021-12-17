@@ -38,7 +38,7 @@ public class Main {
                         writed += "<span>" + space + "</span>";
                     }
                 }else {
-                    writed += "<span class=\" " +token.type+  "\">"+ token.value+"</span>";
+                    writed += "<span class=\""+token.type+"\">"+token.value+"</span>";
                 }
 
             }

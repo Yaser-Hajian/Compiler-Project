@@ -1,0 +1,6 @@
+class AName {
+    MyType main() {
+        let int rof;
+        rof = 23;
+    }
+}

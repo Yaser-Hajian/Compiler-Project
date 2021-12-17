@@ -1,0 +1,5 @@
+class MyExample {
+    void returnValueIsNotCorrect(int a, bool b, string s) {
+        return 0;
+    }
+}

@@ -1,0 +1,4 @@
+class Main {
+	let int foo ;
+	foo = 12 ;
+}

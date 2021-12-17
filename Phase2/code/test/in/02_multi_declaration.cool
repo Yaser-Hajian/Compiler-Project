@@ -1,0 +1,7 @@
+class Main {
+	let int i, j;
+
+    int main() {
+	    let int x, y;
+    }
+}

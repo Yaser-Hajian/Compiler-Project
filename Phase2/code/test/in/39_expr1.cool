@@ -1,0 +1,10 @@
+class Main {
+
+	int AMethod () {
+		c = (a*b(a/b) + 1 - 2) + 2 * bc;  
+		b = c--;  
+		d = ++c;
+	}
+}
+
+

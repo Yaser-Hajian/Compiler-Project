@@ -1,0 +1,7 @@
+class main {
+
+	int method () {
+		let string str;
+		str = "sal"am";
+	}
+}

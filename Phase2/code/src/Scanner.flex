@@ -27,8 +27,24 @@
     }
     public String nextToken(){
       try{
-          Token current = next();
-          return current.value == null ? "$" : current.value;
+          Token current = My_Next_Token();
+          if (current.value == null){
+              return null;
+          }
+          if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){
+              return null;
+          }
+          if (current.type.equals("Reserved")){
+              return current.value;
+          }
+          if (current.type.equals("Operators")) {
+              if (current.value.equals(",")){
+                  return "comma";
+              }else {
+                  return current.value;
+              }
+          }
+          return current.type;
       }catch (Exception e){
           e.printStackTrace();
           return null;
@@ -68,7 +84,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
                 "static"|"class"|"for"|"rof"|"loop"|"pool"|
                 "while"|"break"|"continue"|"if"|"fi"|"else"|
                 "then"|"new"|"Array"|"return"|"in_string"|
-                "in_int"|"print"|"len"
+                "in_int"|"print"|"len"|"true"|"false"
 
 %%
 
@@ -113,20 +129,20 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     }
    "\"" {
         yybegin(STRING);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
 }
 
 <STRING> {
     \"  {
         yybegin(YYINITIAL);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
     {WhiteSpace} {
         return new Token("WhiteSpace",yytext(), yyline);
     }
     [^\n\r\"\\] {
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
         }
     {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);

@@ -103,20 +103,20 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
     }
    "\"" {
         yybegin(STRING);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
 }
 
 <STRING> {
     \"  {
         yybegin(YYINITIAL);
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
     }
     {WhiteSpace} {
         return new Token("WhiteSpace",yytext(), yyline);
     }
     [^\n\r\"\\] {
-        return new Token("String",yytext(), yyline);
+        return new Token("StringLiteral",yytext(), yyline);
         }
     {SpecialChar} {
         return new Token("Special Characters",yytext(), yyline);

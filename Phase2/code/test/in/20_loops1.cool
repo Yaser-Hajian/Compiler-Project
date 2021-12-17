@@ -1,0 +1,12 @@
+class Main{
+
+	int main () {
+		let int i;
+		for(i;i<12;i++)
+			print(i);
+		rof
+	}
+
+}
+
+
