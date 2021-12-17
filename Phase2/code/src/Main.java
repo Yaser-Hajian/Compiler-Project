@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
@@ -21,5 +22,14 @@ public class Main {
             System.out.println("bad input!");
             return;
         }
+
+        My_Scanner my_scanner = new My_Scanner(new FileReader(inputCollFilePath));
+        CodeGeneratorImp codeGen = new CodeGeneratorImp();
+        Parser parser = new Parser(my_scanner ,codeGen ,tablePath);
+        parser.parse();
+
+
+
+
     }
 }
