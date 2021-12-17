@@ -35,13 +35,13 @@
               return null;
           }
           if (current.type.equals("Reserved")){
-              return current.value;
+              return String.valueOf(current.value);
           }
           if (current.type.equals("Operators")) {
               if (current.value.equals(",")){
                   return "comma";
               }else {
-                  return current.value;
+                  return String.valueOf(current.value);
               }
           }
           return current.type;
