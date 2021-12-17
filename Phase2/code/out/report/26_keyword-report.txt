@@ -1,2 +1,2 @@
 Error happened while parsing ...
-At node 0: current token is Identifiers but except: [class, CLASS]
+At node 0: current token is identifiers but except: [class, CLASS]

@@ -27,24 +27,27 @@
     }
     public String nextToken(){
       try{
-          Token current = My_Next_Token();
-          if (current.value == null){
-              return null;
+          while (true){
+              Token current = My_Next_Token();
+                        if (String.valueOf(current.value)  == null){
+                            return "$";
+                        }
+                        if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){
+                            continue;
+                        }
+                        if (current.type.equals("Reserved")){
+                            return String.valueOf(current.value);
+                        }
+                        if (current.type.equals("Operators")) {
+                            if (current.value.equals(",")){
+                                return "comma";
+                            }else {
+                                return String.valueOf(current.value);
+                            }
+                        }
+                        return current.type;
           }
-          if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){
-              return null;
-          }
-          if (current.type.equals("Reserved")){
-              return String.valueOf(current.value);
-          }
-          if (current.type.equals("Operators")) {
-              if (current.value.equals(",")){
-                  return "comma";
-              }else {
-                  return String.valueOf(current.value);
-              }
-          }
-          return current.type;
+
       }catch (Exception e){
           e.printStackTrace();
           return null;
@@ -94,7 +97,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
         return new Token("Reserved",yytext() , yyline);
     }
     {Identifier} {
-        return new Token("Identifiers",yytext() , yyline);
+        return new Token("identifiers",yytext() , yyline);
     }
     {Comment} {
         return new Token("Comment",yytext() , yyline);

@@ -68,7 +68,7 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
         return new Token("Reserved",yytext() , yyline);
     }
     {Identifier} {
-        return new Token("Identifiers",yytext() , yyline);
+        return new Token("identifiers",yytext() , yyline);
     }
     {Comment} {
         return new Token("Comment",yytext() , yyline);
