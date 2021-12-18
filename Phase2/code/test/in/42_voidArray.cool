@@ -1,0 +1,3 @@
+class TeSt{
+	let void[] array;
+}
