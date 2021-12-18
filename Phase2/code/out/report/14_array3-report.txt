@@ -1,2 +1,2 @@
 Error happened while parsing ...
-At node 69: current token is . but except: [comma, ;, (, ), ], ||, |, &&, &, >=, ==, <=, <, >, !=, --, ++, +, -, /, *, PARANTEZ]
+At node 69: current token is . but except: [comma, ;, (, ), ], ++, --, ||, |, &&, &, >=, ==, <=, <, >, !=, +, -, /, *, PARANTEZ]

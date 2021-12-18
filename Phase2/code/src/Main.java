@@ -37,9 +37,5 @@ public class Main {
             fw.flush();
         }
 
-
-
-
-
     }
 }

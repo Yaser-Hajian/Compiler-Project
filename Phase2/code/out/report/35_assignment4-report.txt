@@ -2,5 +2,12 @@ Number: 10
 Number: 0 
 Number: 1 
 Number: 1 
+Number: 2 
+Number: 2 
+Number: 0 
+Number: 1 
+Number: 3 
+Number: 1 
 Error happened while parsing ...
-At node 179: current token is - but except: [identifiers, (, !, len, in_int, in_string, new, StringLiteral, Integer, Real, true, false]
+At node 188: current token is / but except: [), ++, --, +, -, /, *]
+At node 95: current token is / but except: []

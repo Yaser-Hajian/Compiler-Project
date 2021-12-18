@@ -1,2 +1,3 @@
 Error happened while parsing ...
-At node 41: current token is * but except: [identifiers, comma, [, )]
+At node 188: current token is + but except: [), ++, --, +, -, /, *]
+At node 95: current token is + but except: []
