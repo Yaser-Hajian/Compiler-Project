@@ -1,18 +1,1 @@
-Number: 0 
-Number: 1 
-Number: 1 
-Number: 0 
-Number: 1 
-Number: 1 
-Number: 1 
-Number: 1 
-Number: 1 
-Number: 0 
-Number: 100 
-Number: 100 
-Number: 0 
-Number: 100 
-Number: 1 
-Number: 1 
-Error happened while parsing ...
-At node 188: current token is ; but except: [), ++, --, +, -, /, *]
+Ok
