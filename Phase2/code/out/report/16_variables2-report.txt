@@ -1,2 +1,1 @@
-Error happened while parsing ...
-At node 34: current token is identifiers but except: [Identifiers]
+Ok

@@ -1,2 +1,4 @@
+Number: 1 
+RealNumber: 1.2 
 Error happened while parsing ...
-At node 42: current token is identifiers but except: [Identifiers, []
+At node 137: current token is - but except: [identifiers, (, !, len, in_int, in_string, new, StringLiteral, Integer, Real, true, false, MAIN_EXPR]

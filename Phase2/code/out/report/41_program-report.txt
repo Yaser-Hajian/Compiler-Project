@@ -1,2 +1,17 @@
+Number: 0 
+Number: 1 
+Number: 1 
+Number: 0 
+Number: 1 
+Number: 1 
+Number: 1 
+Number: 1 
+Number: 1 
+Number: 0 
+Number: 100 
+Number: 100 
+Number: 0 
+Number: 100 
+Number: 1 
 Error happened while parsing ...
-At node 16: current token is identifiers but except: [Identifiers]
+At node 59: current token is - but except: [identifiers, (, len, in_int, in_string, new, StringLiteral, Integer, Real, true, false, EXPR]

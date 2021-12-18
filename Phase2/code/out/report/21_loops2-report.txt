@@ -1,2 +1,5 @@
+Number: 0 
+Number: 12 
 Error happened while parsing ...
-At node 37: current token is identifiers but except: [comma, Identifiers, ), []
+At node 25: current token is ++ but except: [comma, ;, [, ), ], ., ||, |, &&, &, >=, ==, <=, <, >, !=, --, ++, +, -, /, *, =, +=, -=, *=, /=]
+At node 45: current token is ++ but except: [=, +=, -=, *=, /=, ASSIGN]

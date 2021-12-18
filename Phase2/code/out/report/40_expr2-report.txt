@@ -1,2 +1,2 @@
 Error happened while parsing ...
-At node 37: current token is identifiers but except: [comma, Identifiers, ), []
+At node 41: current token is ++ but except: [identifiers, comma, [, )]

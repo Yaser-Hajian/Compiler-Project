@@ -1,2 +1,1 @@
-Error happened while parsing ...
-At node 5: current token is identifiers but except: [}, let, Identifiers, int, real, string, bool, void, DECLARATION, METHOD]
+Ok

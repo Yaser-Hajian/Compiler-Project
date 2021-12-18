@@ -29,7 +29,7 @@
       try{
           while (true){
               Token current = My_Next_Token();
-                        if (String.valueOf(current.value)  == null){
+                        if (current  == null){
                             return "$";
                         }
                         if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){

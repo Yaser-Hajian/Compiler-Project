@@ -431,7 +431,7 @@ public class My_Scanner implements Lexical {
       try{
           while (true){
               Token current = My_Next_Token();
-                        if (String.valueOf(current.value)  == null){
+                        if (current  == null){
                             return "$";
                         }
                         if (current.type.equals("Comment") || current.type.equals("WhiteSpace")){
@@ -890,7 +890,7 @@ public class My_Scanner implements Lexical {
             // fall through
           case 20: break;
           case 7:
-            { return new Token("StringLiteral",yytext(), yyline);
+            { return new Token("String",yytext(), yyline);
             }
             // fall through
           case 21: break;

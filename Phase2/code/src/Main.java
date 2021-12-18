@@ -1,4 +1,5 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
@@ -26,7 +27,16 @@ public class Main {
         My_Scanner my_scanner = new My_Scanner(new FileReader(inputCollFilePath));
         CodeGeneratorImp codeGen = new CodeGeneratorImp();
         Parser parser = new Parser(my_scanner ,codeGen ,tablePath);
-        parser.parse();
+        FileWriter fw = new FileWriter(outputFilePath);
+        try {
+            parser.parse();
+            fw.write("Syntax is correct!");
+            fw.flush();
+        }catch (Exception e){
+            fw.write("Syntax is wrong!");
+            fw.flush();
+        }
+
 
 
 

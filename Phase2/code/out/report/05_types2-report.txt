@@ -1,2 +1,1 @@
-Error happened while parsing ...
-At node 8: current token is identifiers but except: [Identifiers, int, real, string, bool, VARIABLE]
+Ok
