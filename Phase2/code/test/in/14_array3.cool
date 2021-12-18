@@ -11,7 +11,7 @@ class Main {
 	
     int main() {
 		let Child[] list;
-		list = new Array(Child, list.par.length);
+		list = new Array(Child, list.par);
 		print(list[32]);
         return 0;
     }
