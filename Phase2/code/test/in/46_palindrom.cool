@@ -1,0 +1,29 @@
+class Palindrom{
+
+bool isPalindrome(string str, int low, int high) {
+	while (low < high) loop
+		if (str[low] != str[high]) then
+			return false;
+		fi
+        low++;
+		high--;
+    pool
+	return true;
+}
+
+void allPalPartitions(string str) {
+	let int n;
+    n = str.length();
+    for ( i=0; i< allPart.size(); i++ )
+		print(allPart[i] + " ");
+		print("\n");
+    rof
+}
+
+int main(){
+	    let string str;
+        str = "nitin";
+	    allPalPartitions(str);
+	    return 0;
+    }
+}

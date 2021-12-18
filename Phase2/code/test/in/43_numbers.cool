@@ -1,8 +1,14 @@
 class number{
-	int al_i = 23E+12;
-	let haSan = 0Xa23BaA;
-	// comment
-	// let
-	real BB = 12.;
-	string Na_m = "salam\t hasan\n \" \\ ";
+	let int al_i;
+	let real haSan;
+	let real BB;
+	int main (){
+		al_i = 23E+12;
+		haSan = 0Xa23BaA;
+		// comment
+		// let
+		BB = 12.;
+		let string Na_m;
+		Na_m = "salam\t hasan\n \" \\ ";
+	}
 }

@@ -1,0 +1,19 @@
+class max {
+    int max(int x, int y) {
+        if (x > y) then
+            return x;
+        else
+            return y;
+        fi
+    }
+  
+    int main() {
+    let int a,b;
+    a = 10;
+    b = 20;
+    let int m;
+    m = max(a, b);
+    print("max is %d" + m);
+    return 0;
+    }
+}
