@@ -15,7 +15,24 @@ public class CodeGeneratorImp implements CodeGenerator {
             case "Assignment":
                 System.out.println("Code generation for assignment");
                 break;
-
+            case "Mult":
+                System.out.println("Code generation for Mult");
+                break;
+            case "Add":
+                System.out.println("Code generation for Add");
+                break;
+            case "jz":
+                System.out.println("Code generation for jz");
+                break;
+            case "cjz":
+                System.out.println("Code generation for cjz");
+                break;
+            case "jp":
+                System.out.println("Code generation for jp");
+                break;
+            case "cjp":
+                System.out.println("Code generation for cjp");
+                break;
             default:
                 System.out.println("Not supported Semantic token: "+sem);
         }
