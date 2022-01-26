@@ -1,0 +1,41 @@
+// Main class
+class Main {
+  let int[] items;
+  void printArray () {
+    let int i;
+    for (i = 0 ; i < 100 ; i++)
+      print(items[i]);
+    rof
+  }
+ 
+  /* main
+	method
+	*/
+
+  int main() {
+    let int i;
+    let int j;
+    let int[] rawItems;
+    let int arrayLenInHex;
+    arrayLenInHex = 0x64;
+    rawItems = new Array(int, arrayLenInHex);
+    let int dummyScientificNumber;
+    dummyScientificNumber = 10.2E+2;
+
+    print("Please enter random numbers!\tWe just print them!");
+    print("Max numbers counter: 100,\n(Enter \"-1\"to end sooner.)");
+    for(i=0 ; i < arrayLenInHex; i = i+ 1)
+      let int x;
+      x = in_int();
+      if (x == -1) then
+        break;
+      else
+        rawItems[i] = x;
+      fi
+    rof
+    printArray();
+
+    /* Undefined Token (for example a single backslash "\" is undefined) */
+    \
+  }
+}

@@ -1,0 +1,79 @@
+// Keywords
+let void int real bool string
+static class for rof loop pool
+while break continue if fi else
+then new Array return in_string in_int
+print len
+
+// Identifier
+Hamid123
+A_Variable_For__Test
+
+
+// Not a Identifier
+123Hamid
+__Var
+Hamid12345678_12345678_12345678ANewIdentifier
+
+
+/* Decimal Int */
+1689, 129, 0, 23
+
+/// Hex
+0x0, 0x13, 0X12, 0xff
+
+/***  Real  ***/
+108.2188
+0.23
+3.141592
+21.
+0.
+
+/***  Not Real ***/ 
+.12
+.02
+
+/* Scientific
+   Notation
+*/
+6.67E-11
+120.0E+388
+12.E678
+0.5E-54
+
+/* Not Scientific
+   Notation
+*/
+.98E59
+
+/// This is a single line comment /// 
+
+// Operators
+// And
+// Punctuations
++ -
+* /
++= -=
+*= /=
+++ --
+< <=
+> >=
+!= ==
+= %
+&& ||
+& |
+^
+! .
+, ;
+[ ]
+()
+{}
+
+/******StringsAndSpecialChars******/
+// Without special characters:
+"Ali"
+"Hamid  And  Abbas"
+// With special chatacters:
+"Hamid has a \"BIG\" car\tto go to his work"
+"Asghar says \'Ghahreman\' is not my last film.\n"
+"Please use \\n with printf instead of cout with endl"

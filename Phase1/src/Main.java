@@ -55,7 +55,7 @@ public class Main {
         ArrayList<My_Scanner.Token> tokens = new ArrayList<>();
         FileWriter fileWriter = new FileWriter("src/Output/output.html" , true);
         try {
-            My_Scanner scanner = new My_Scanner(new FileReader("src/input.cool"));
+            My_Scanner scanner = new My_Scanner(new FileReader("src/phase1_test1.cool"));
             while (true) {
                 My_Scanner.Token currentToken = scanner.nextToken();
                 if (scanner.yyatEOF()) {
