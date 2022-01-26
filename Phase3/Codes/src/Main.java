@@ -25,7 +25,7 @@ public class Main {
         }
 
         My_Scanner my_scanner = new My_Scanner(new FileReader(inputCollFilePath));
-        CodeGeneratorImp codeGen = new CodeGeneratorImp();
+        CodeGeneratorImp codeGen = new CodeGeneratorImp(my_scanner);
         Parser parser = new Parser(my_scanner ,codeGen ,tablePath);
         FileWriter fw = new FileWriter(outputFilePath);
         try {
