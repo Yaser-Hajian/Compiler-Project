@@ -314,7 +314,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                             AssemblyFileWriter.appendDebugLine("0($t3)");
 
                         } else {
-                            VariableDescriptor arrIndex = (VariableDescriptor) des;
+                            VariableDSCP arrIndex = (VariableDSCP) des;
                             Descriptor nameOfArrDes = (Descriptor) SemanticStack.pop();
                             AssemblyFileWriter.appendCommandToCode("li", "$t1", String.valueOf(arrIndex.getValue()));
                             AssemblyFileWriter.appendCommandToCode("la", "$t2", nameOfArrDes.getName());

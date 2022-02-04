@@ -14,8 +14,8 @@ public class Print extends Statement {
 
     @Override
     public void compile() {
-        boolean isInteger = value.getType() == Type.INTEGER_NUMBER;
-        boolean isFloat = value.getType() == Type.REAL_NUMBER;
+        boolean isInteger = value.getType().equals("INTEGER_NUMBER") ;
+        boolean isFloat = value.getType().equals("REAL_NUMBER") ;
         String outputType = isInteger ? "1" : isFloat ? "2" : "4";
         String comment = isInteger ? "integer" : isFloat ? "float" : "string";
         AssemblyFileWriter.appendComment("print" + " " + comment + " (" + value.getName() + ")");

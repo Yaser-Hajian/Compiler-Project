@@ -1,5 +1,6 @@
 package SemanticsImp.StatementBlock.Statements;
 
+import CodeGen.CodeGeneratorImp;
 import SemanticsImp.StatementBlock.Statement;
 import SymbolTable.DSCP.Descriptor;
 import Utils.AssemblyFileWriter;
@@ -15,8 +16,8 @@ public class If extends Statement {
 
     @Override
     public void compile() {
-        afterIfLabel = CodeGenerator.generateNewLabel();
-        afterElseLabel = CodeGenerator.generateNewLabel();
+        afterIfLabel = CodeGeneratorImp.generateNewLabel();
+        afterElseLabel = CodeGeneratorImp.generateNewLabel();
         AssemblyFileWriter.appendComment("if code for " + value);
         AssemblyFileWriter.appendCommandToCode("la", "$t0", value.getName());
         AssemblyFileWriter.appendCommandToCode("lw", "$t1", "0($t0)");

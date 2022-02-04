@@ -1,9 +1,11 @@
 package SemanticsImp.Expression.Constants;
 
+import CodeGen.CodeGeneratorImp;
 import SymbolTable.DSCP.Variable.GlobalVariableDSCP;
 import SymbolTable.DSCP.Variable.VariableDSCP;
 import SymbolTable.GlobalSymbolTable;
 import SymbolTable.Stack.SemanticStack;
+import Utils.AssemblyFileWriter;
 
 public class RealConstant extends ConstantExpression {
     protected float realConst;
@@ -18,8 +20,8 @@ public class RealConstant extends ConstantExpression {
         VariableDSCP descriptor = (VariableDSCP) GlobalSymbolTable.getSymbolTable().getDescriptor("$" + realConst);
         boolean hasDescriptor = descriptor != null;
         if (!hasDescriptor) {
-            String variableName = CodeGenerator.getVariableName();
-            descriptor = new GlobalVariableDSCP(variableName, Type.REAL_NUMBER);
+            String variableName = CodeGeneratorImp.getVariableName();
+            descriptor = new GlobalVariableDSCP(variableName, "REAL_NUMBER");
             descriptor.setValue(String.valueOf(realConst));
             AssemblyFileWriter.appendComment("integer constant");
             AssemblyFileWriter.appendCommandToCode("li.s", "$f0", String.valueOf(realConst));
