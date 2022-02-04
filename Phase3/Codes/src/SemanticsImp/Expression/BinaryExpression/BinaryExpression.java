@@ -3,7 +3,9 @@ package SemanticsImp.Expression.BinaryExpression;
 import SemanticsImp.Declarations.VariableDeclaration.LocalVariableDeclaration;
 import SemanticsImp.Expression.Expression;
 import SymbolTable.DSCP.Descriptor;
+import SymbolTable.DSCP.Variable.LocalVariableDSCP;
 import SymbolTable.Stack.SemanticStack;
+import Utils.AssemblyFileWriter;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public abstract class BinaryExpression extends Expression {
         AssemblyFileWriter.appendCommandToData(variableName, "word", "0");
         AssemblyFileWriter.appendCommandToCode(storeCommand, variableName0, variableName);
         AssemblyFileWriter.appendDebugLine(variableName);
-        SemanticStack.push(new LocalVariableDescriptor(variableName, resultType));
+        SemanticStack.push(new LocalVariableDSCP(variableName, resultType));
     }
 
     private void multiply(Descriptor firstOperandDes, Descriptor secondOperandDes, String resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {

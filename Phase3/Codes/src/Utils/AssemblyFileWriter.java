@@ -1,8 +1,14 @@
 package Utils;
 
+import Utils.command.CommandLine;
+import Utils.command.DataLine;
+import Utils.command.Label;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AssemblyFileWriter {
 

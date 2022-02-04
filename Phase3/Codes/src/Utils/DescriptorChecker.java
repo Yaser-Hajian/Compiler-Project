@@ -3,6 +3,7 @@ package Utils;
 import SymbolTable.DSCP.Descriptor;
 import SymbolTable.GlobalSymbolTable;
 import SymbolTable.Stack.SymbolTableStack;
+import Utils.Errors.NameError;
 
 public class DescriptorChecker {
     public static void checkContainsDescriptor(Descriptor descriptor) {

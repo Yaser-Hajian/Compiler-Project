@@ -18,5 +18,5 @@ public class FunctionDSCP extends Descriptor {
         this.labelFrom = labelFrom;
     }
 
-    
+
 }

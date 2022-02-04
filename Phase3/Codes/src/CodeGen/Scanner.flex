@@ -16,9 +16,9 @@
 
 %{
      public class Token {
-     String type;
-     Object value;
-     int lineNumber;
+     public String type;
+     public Object value;
+     public int lineNumber;
      public Token(String type , Object value , int lineNumber){
          this.value=value;
          this.type=type;
@@ -57,7 +57,7 @@
     // tarif e variable va function va class dar inja tarif mishavad.
     public int ICV;
     public double RCV;
-
+    public Token current_Token;
 %}
 
 Digit = [0-9]
@@ -94,61 +94,75 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 <YYINITIAL> {
 
     {ReservedWord} {
-        return new Token("Reserved",yytext() , yyline);
+        current_Token =   new Token("Reserved",yytext() , yyline);
+        return current_Token;
     }
     {Identifier} {
-        return new Token("identifiers",yytext() , yyline);
+          current_Token = new Token("identifiers",yytext() , yyline);
+        return current_Token;
     }
     {Comment} {
-        return new Token("Comment",yytext() , yyline);
+          current_Token=new Token("Comment",yytext() , yyline);
+        return current_Token;
     }
     {ScientificNotation} {
         String sNumber = yytext();
         RCV = Double.parseDouble(sNumber);
         System.out.println("ScientificNotation: "+ sNumber + " " + "with decimal value of "+ RCV);
-        return new Token("Real",sNumber, yyline);
+        current_Token=new Token("Real",sNumber, yyline);
+        return current_Token;
     }
     {Hexadecimal} {
         String hex_number = yytext();
         ICV = Integer.parseInt(hex_number.substring(2) , 16);
         System.out.println("HexNumber: "+ hex_number + " " + "with decimal value of "+ ICV);
-        return new Token("Integer",hex_number, yyline);
+        current_Token = new Token("Integer",hex_number, yyline);
+        return current_Token;
     }
     {DecimalInteger} {
         ICV = Integer.parseInt(yytext());
         System.out.println("Number: "+ ICV + " ");
-        return new Token("Integer",ICV, yyline);
+        current_Token = new Token("Integer",ICV, yyline);
+        return current_Token;
     }
     {RealNumber} {
         RCV = Double.parseDouble(yytext());
         System.out.println("RealNumber: "+ RCV + " ");
-        return new Token("Real", RCV, yyline);
+        current_Token = new Token("Real", RCV, yyline);
+        return current_Token;
     }
     {Operators} {
-        return new Token("Operators",yytext(), yyline);
+        current_Token=new Token("Operators",yytext(), yyline);
+        return current_Token;
     }
     {WhiteSpace} {
-        return new Token("WhiteSpace",yytext(), yyline);
+          current_Token =  new Token("WhiteSpace",yytext(), yyline);
+        return current_Token;
     }
    "\"" {
         yybegin(STRING);
-        return new Token("StringLiteral",yytext(), yyline);
+        current_Token = new Token("StringLiteral",yytext(), yyline);
+        return current_Token;
     }
 }
 
 <STRING> {
     \"  {
         yybegin(YYINITIAL);
-        return new Token("StringLiteral",yytext(), yyline);
+        current_Token = new Token("StringLiteral",yytext(), yyline);
+        return current_Token;
     }
     {WhiteSpace} {
-        return new Token("WhiteSpace",yytext(), yyline);
+          current_Token = new Token("WhiteSpace",yytext(), yyline);
+        return current_Token;
     }
     [^\n\r\"\\] {
-        return new Token("String",yytext(), yyline);
+          current_Token = new Token("String",yytext(), yyline);
+        return current_Token;
         }
     {SpecialChar} {
-        return new Token("Special Characters",yytext(), yyline);
+          current_Token = new Token("Special Characters",yytext(), yyline);
+        return current_Token;
     }
 }
 
@@ -156,5 +170,6 @@ ReservedWord = "let"|"void"|"int"|"real"|"bool"|"string"|
 [^] {
 //    return "Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext()  ;
      System.out.println("Error at line: "+yyline + "index: "+ yycolumn + "character = "+ yytext());
-     return new Token("Undefined", yytext() , yyline) ;
+     current_Token = new Token("Undefined", yytext() , yyline) ;
+     return current_Token;
     }
