@@ -1,14 +1,16 @@
 package SemanticsImp.Declarations;
 
-public abstract class DeclarationWithType extends Declaration {
-    private String type;
+import CodeGen.Type;
 
-    public DeclarationWithType(String name, String type) {
+public abstract class DeclarationWithType extends Declaration {
+    private Type type;
+
+    public DeclarationWithType(String name, Type type) {
         super(name);
         this.type = type;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 }

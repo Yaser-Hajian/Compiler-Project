@@ -1,13 +1,15 @@
 package SymbolTable.DSCP;
 
+import CodeGen.Type;
+
 import java.util.Objects;
 
 public abstract class Descriptor {
     private String addressName;
-    private String type;
+    private Type type;
     private boolean isLocal;
 
-    public Descriptor(String addressName, String type, boolean isLocal) {
+    public Descriptor(String addressName, Type type, boolean isLocal) {
         this.addressName = addressName;
         this.type = type;
         this.isLocal = isLocal;
@@ -17,11 +19,11 @@ public abstract class Descriptor {
         this.addressName = addressName;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 

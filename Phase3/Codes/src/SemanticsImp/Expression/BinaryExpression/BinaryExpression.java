@@ -2,6 +2,7 @@ package SemanticsImp.Expression.BinaryExpression;
 
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SemanticsImp.Declarations.VariableDeclaration.LocalVariableDeclaration;
 import SemanticsImp.Expression.Expression;
 import SymbolTable.DSCP.Descriptor;
@@ -39,7 +40,7 @@ public abstract class BinaryExpression extends Expression {
         return variableName;
     }
 
-    private void generate2OperandCommands(Descriptor firstOperandDes, Descriptor secondOperandDes, String resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
+    private void generate2OperandCommands(Descriptor firstOperandDes, Descriptor secondOperandDes, Type resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
         String variableName = loadAndOperate(firstOperandDes, secondOperandDes, operationCommand, storeCommand, loadCommand, variableName0, variableName1);
 
         AssemblyFileWriter.appendCommandToData(variableName, "word", "0");
@@ -48,7 +49,7 @@ public abstract class BinaryExpression extends Expression {
         SemanticStack.push(new LocalVariableDSCP(variableName, resultType));
     }
 
-    private void multiply(Descriptor firstOperandDes, Descriptor secondOperandDes, String resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
+    private void multiply(Descriptor firstOperandDes, Descriptor secondOperandDes, Type resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
         String variableName = loadAndOperate(firstOperandDes, secondOperandDes, operationCommand, storeCommand, loadCommand, variableName0, variableName1);
 
         AssemblyFileWriter.appendCommandToCode("mfhi", "$t1");
@@ -63,7 +64,7 @@ public abstract class BinaryExpression extends Expression {
     public static String afterCompareLabel;
     public static String variableNameOfContinue;
 
-    private void divide(Descriptor firstOperandDes, Descriptor secondOperandDes, String resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
+    private void divide(Descriptor firstOperandDes, Descriptor secondOperandDes, Type resultType, String operationCommand, String storeCommand, String loadCommand, String variableName0, String variableName1) {
         String variableName = loadAndOperate(firstOperandDes, secondOperandDes, operationCommand, storeCommand, loadCommand, variableName0, variableName1);
 
         AssemblyFileWriter.appendCommandToCode("mfhi", "$t1");
@@ -75,7 +76,7 @@ public abstract class BinaryExpression extends Expression {
         SemanticStack.push(new LocalVariableDeclaration(variableName, resultType));
     }
 
-    private void generateMinusMinusCommand(Descriptor firstOperandDes, String resultType, String operationCommand/*, boolean isBeforeExpression*/) {
+    private void generateMinusMinusCommand(Descriptor firstOperandDes, Type resultType, String operationCommand/*, boolean isBeforeExpression*/) {
         String variableName = CodeGeneratorImp.getVariableName();
         AssemblyFileWriter.appendComment("binary " + "--" + " expression of " + firstOperandDes.getName());
         AssemblyFileWriter.appendCommandToCode("la", "$t0", firstOperandDes.getName());
@@ -92,7 +93,7 @@ public abstract class BinaryExpression extends Expression {
         }*/
     }
 
-    private void generatePlusPlusCommand(Descriptor firstOperandDes, String resultType, String operationCommand/*, boolean isBeforeExpression*/) {
+    private void generatePlusPlusCommand(Descriptor firstOperandDes, Type resultType, String operationCommand/*, boolean isBeforeExpression*/) {
         String variableName = CodeGeneratorImp.getVariableName();
         AssemblyFileWriter.appendComment("binary " + "++" + " expression of " + firstOperandDes.getName());
         AssemblyFileWriter.appendCommandToCode("la", "$t0", firstOperandDes.getName());
@@ -124,10 +125,10 @@ public abstract class BinaryExpression extends Expression {
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", variableNameOfContinue);
         AssemblyFileWriter.addLabel(continueLabel);
 //        AssemblyFileWriter.appendDebugLine(variableNameOfContinue);
-        SemanticStack.push(new LocalVariableDeclaration(variableNameOfContinue, "INTEGER_NUMBER"));
+        SemanticStack.push(new LocalVariableDeclaration(variableNameOfContinue, Type.INTEGER_NUMBER));
     }
 
-    private void generateNotCommand(Descriptor firstOperandDes, String resultType, String operationCommand) {
+    private void generateNotCommand(Descriptor firstOperandDes, Type resultType, String operationCommand) {
         String variableName = CodeGeneratorImp.getVariableName();
         AssemblyFileWriter.appendComment("binary " + operationCommand + " expression of " + firstOperandDes.getName());
         AssemblyFileWriter.appendCommandToCode("la", "$t0", firstOperandDes.getName());
@@ -157,28 +158,28 @@ public abstract class BinaryExpression extends Expression {
             DescriptorChecker.checkContainsDescriptorGlobal(secondOperandDes);
         }
 
-        String resultType = firstOperandDes.getType();
+        Type resultType = firstOperandDes.getType();
         String storeCommand = "sw", loadCommand = "lw";
         String variableName0 = "$f0", variableName1 = "$f1";
 
         String extention = null;
 
         switch (resultType) {
-            case "INTEGER_NUMBER":
+            case INTEGER_NUMBER:
                 extention = "";
                 storeCommand = "sw";
                 loadCommand = "lw";
                 variableName0 = "$t0";
                 variableName1 = "$t1";
                 break;
-            case "REAL_NUMBER":
+            case REAL_NUMBER:
                 extention = ".s";
                 storeCommand = "s.s";
                 loadCommand = "l.s";
                 variableName0 = "$f0";
                 variableName1 = "$f1";
                 break;
-            case "STRING":
+            case STRING:
                 // extention = "";
                 // TODO
                 break;

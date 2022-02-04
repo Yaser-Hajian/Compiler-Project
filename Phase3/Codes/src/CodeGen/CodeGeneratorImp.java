@@ -1,10 +1,13 @@
 package CodeGen;
 
 import SemanticsImp.Expression.BinaryExpression.Arithmetic.*;
+import SemanticsImp.Expression.BinaryExpression.Cast.DoubleToInt;
+import SemanticsImp.Expression.BinaryExpression.Cast.IntToDouble;
 import SemanticsImp.Expression.BinaryExpression.Logical.LogicalExpressions.*;
 import SemanticsImp.Expression.Constants.IntegerConstant;
 import SemanticsImp.Expression.Constants.RealConstant;
 import SemanticsImp.Expression.Constants.StringConstant;
+import SemanticsImp.Expression.GetInput.ReadInt;
 import SemanticsImp.Expression.GetInput.ReadLine;
 import SemanticsImp.Expression.GetInput.ReadReal;
 import SemanticsImp.Expression.UnaryExp.Arithmetic.MinusMinus;
@@ -216,33 +219,33 @@ public class CodeGeneratorImp implements CodeGenerator {
                         For.completeStepOfFor();
                         break;
                     case "arrayDcl":
-                        DescriptorChecker.checkNotContainsDescriptor(lexical.currentSymbol.getToken());
-                        DescriptorChecker.checkNotContainsDescriptorGlobal(lexical.currentSymbol.getToken());
+                        DescriptorChecker.checkNotContainsDescriptor((String) scanner.current_Token.value);
+                        DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
                         Type arrType = (Type) SemanticStack.top();
-                        if (!SymbolTableStack.top().contains(lexical.currentSymbol.getToken())) {
+                        if (!SymbolTableStack.top().contains((String) scanner.current_Token.value)) {
                             LocalArrayDSCP lad = new LocalArrayDSCP(getVariableName(), arrType);
-                            SymbolTableStack.top().addDescriptor(lexical.currentSymbol.getToken(), lad);
+                            SymbolTableStack.top().addDescriptor((String) scanner.current_Token.value, lad);
 //                    AssemblyFileWriter.appendCommandToData(lad.getName(), "word", "0");
-                            SemanticStack.push(lexical.currentSymbol.getToken());
+                            SemanticStack.push((String) scanner.current_Token.value);
                         } else {
                             try {
-                                throw new NameError(lexical.currentSymbol.getToken(), true);
+                                throw new NameError((String) scanner.current_Token.value, true);
                             } catch (Exception e) {
                                 System.err.println(e.getMessage());
                             }
                         }
                         break;
                     case "arrayDclGlobal":
-                        DescriptorChecker.checkNotContainsDescriptorGlobal(lexical.currentSymbol.getToken());
+                        DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
                         arrType = (Type) SemanticStack.top();
-                        if (!GlobalSymbolTable.getSymbolTable().contains(lexical.currentSymbol.getToken())) {
+                        if (!GlobalSymbolTable.getSymbolTable().contains((String) scanner.current_Token.value)) {
                             GlobalArrayDSCP lad = new GlobalArrayDSCP(getVariableName(), arrType);
-                            GlobalSymbolTable.getSymbolTable().addDescriptor(lexical.currentSymbol.getToken(), lad);
+                            GlobalSymbolTable.getSymbolTable().addDescriptor((String) scanner.current_Token.value, lad);
 //                    AssemblyFileWriter.appendCommandToData(lad.getName(), "word", "0");
-                            SemanticStack.push(lexical.currentSymbol.getToken());
+                            SemanticStack.push((String) scanner.current_Token.value);
                         } else {
                             try {
-                                throw new NameError(lexical.currentSymbol.getToken(), true);
+                                throw new NameError((String) scanner.current_Token.value, true);
                             } catch (Exception e) {
                                 System.err.println(e.getMessage());
                             }
@@ -259,7 +262,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                             DescriptorChecker.checkContainsDescriptorGlobal(nameOfArrayDes);
                         }
                         TypeChecker.checkArrayType(nameOfArrayDes.getType(), newArrayType);
-                        ArrayDescriptor ad = new LocalArrayDescriptor(nameOfArrayDes.getName(), newArrayType);
+                        ArrayDSCP ad = new LocalArrayDSCP(nameOfArrayDes.getName(), newArrayType);
                         ad.setSize(Integer.parseInt(sizeDescriptor.getValue()));
                         if (nameOfArrayDes.getIsLocal()) {
                             SymbolTableStack.top().addDescriptor(nameOfArrayDes.getRealName(), ad);
@@ -293,10 +296,10 @@ public class CodeGeneratorImp implements CodeGenerator {
                         Descriptor des = (Descriptor) SemanticStack.pop();
                         AssemblyFileWriter.appendComment("left array assignment");
                         if (TypeChecker.isArrayType(des.getType())) {
-                            VariableDescriptor des2 = (VariableDescriptor) SemanticStack.pop();
+                            VariableDSCP des2 = (VariableDSCP) SemanticStack.pop();
                             Descriptor nameOfArrayDesc = (Descriptor) SemanticStack.pop();
                             int idx = Integer.parseInt(des2.getValue());
-                            int rightIndex = Integer.parseInt(((VariableDescriptor) rightSide).getValue());
+                            int rightIndex = Integer.parseInt(((VariableDSCP) rightSide).getValue());
                             //right
                             AssemblyFileWriter.appendCommandToCode("li", "$t0", String.valueOf(rightIndex));
                             AssemblyFileWriter.appendCommandToCode("la", "$t1", des.getName());
@@ -335,15 +338,15 @@ public class CodeGeneratorImp implements CodeGenerator {
                         break;
                     case "pushInteger":
                         System.out.println("code gen of push integer");
-                        IntegerConstant intConst = new IntegerConstant(lexical.intValue);
+                        IntegerConstant intConst = new IntegerConstant(scanner.ICV);
                         intConst.compile();
                         break;
                     case "pushDouble":
-                        new RealConstant(lexical.realValue).compile();
+                        new RealConstant((float) scanner.RCV).compile();
                         break;
                     case "pushString":
-                        System.out.println("push str " + lexical.stringValue);
-                        new StringConstant(lexical.stringValue).compile();
+                        System.out.println("push str " + (String) scanner.current_Token.value);
+                        new StringConstant((String) scanner.current_Token.value).compile();
                         break;
                     case "pop":
                         System.out.println("code gen of pop");
@@ -352,7 +355,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                         new Print((Descriptor) SemanticStack.pop()).compile();
                         break;
                     case "readInteger":
-                        new ReadInteger().compile();
+                        new ReadInt().compile();
                         break;
                     case "readLine":
                         new ReadLine().compile();
@@ -364,49 +367,49 @@ public class CodeGeneratorImp implements CodeGenerator {
                         new Return((Descriptor) SemanticStack.pop()).compile();
                         break;
                     case "pushType":
-                        SemanticStack.push(changeStringToType(lexical.currentSymbol.getToken()));
+                        SemanticStack.push(changeStringToType((String) scanner.current_Token.value));
                         break;
                     case "popAndPushArrayType":
                         Object o = SemanticStack.pop();
 //                System.out.println(o.toString() + "     <- object top");
                         Type type = (Type) o;
-                        Type resType = null;
+                        String resType = "";
                         switch (type) {
                             case INTEGER_NUMBER:
-                                resType = Type.INT_ARRAY;
+                                resType = "INT_ARRAY";
                                 break;
                             case REAL_NUMBER:
-                                resType = Type.DOUBLE_ARRAY;
+                                resType = "DOUBLE_ARRAY";
                                 break;
                             case STRING:
-                                resType = Type.STRING_ARRAY;
+                                resType = "STRING_ARRAY";
                                 break;
                         }
                         SemanticStack.push(resType);
                         break;
                     case "pushIdDcl":
-                        DescriptorChecker.checkNotContainsDescriptor(lexical.currentSymbol.getToken());
-                        DescriptorChecker.checkNotContainsDescriptorGlobal(lexical.currentSymbol.getToken());
+                        DescriptorChecker.checkNotContainsDescriptor((String) scanner.current_Token.value);
+                        DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
 
-                        SemanticStack.push(lexical.currentSymbol.getToken());
+                        SemanticStack.push((String) scanner.current_Token.value);
                         break;
                     case "pushIdDclGlobal":
-                        DescriptorChecker.checkNotContainsDescriptorGlobal(lexical.currentSymbol.getToken());
-                        SemanticStack.push(lexical.currentSymbol.getToken());
+                        DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
+                        SemanticStack.push((String) scanner.current_Token.value);
                         break;
                     case "pushId":
 
-                        if (!SymbolTableStack.isEmpty() && SymbolTableStack.top().contains(lexical.currentSymbol.getToken()))
-                            SemanticStack.push(SymbolTableStack.top().getDescriptor(lexical.currentSymbol.getToken()));
+                        if (!SymbolTableStack.isEmpty() && SymbolTableStack.top().contains((String) scanner.current_Token.value))
+                            SemanticStack.push(SymbolTableStack.top().getDescriptor((String) scanner.current_Token.value));
                         else {
                             try {
-                                SemanticStack.push(GlobalSymbolTable.getSymbolTable().getDescriptor(lexical.currentSymbol.getToken()));
+                                SemanticStack.push(GlobalSymbolTable.getSymbolTable().getDescriptor((String) scanner.current_Token.value));
                                 System.out.println(401);
                             } catch (Exception e1) {
                                 try {
                                     try {
                                         System.out.println(407);
-                                        throw new NameError(lexical.currentSymbol.getToken(), false);
+                                        throw new NameError((String) scanner.current_Token.value, false);
                                     } catch (Exception e2) {
                                         System.err.println(e2.getMessage());
                                         System.out.println(410);
@@ -426,27 +429,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                             try {
                                 if (!SemanticStack.isEmpty()) {
                                     o = SemanticStack.pop();
-                                    String isRecord = (String) o;
-                                    if (isRecord.equals("record")) {
-                                        String recName = (String) t1;
-                                        if (!Records.contains(recName)) {
-                                            Records.noRecordWithThisName(recName);
-                                        } else {
-                                            RecordDescriptor recordDescriptor = new RecordDescriptor(getVariableName());
-                                            recordDescriptor.setTypeName(recName);
-                                            ArrayList<RecordElement> recordElements = new ArrayList<>();
-                                            ArrayList<RecordVariable> recordVariables = Records.getVars(recName);
-                                            for (int i = 0; i < recordVariables.size(); i++) {
-                                                RecordVariable r = recordVariables.get(i);
-                                                recordElements.add(new RecordElement(i, new LocalVariableDescriptor(r.getId(), r.getType())));
-                                            }
-                                            recordDescriptor.setRecordElements(recordElements);
-                                            GlobalSymbolTable.getSymbolTable().addDescriptor(name, recordDescriptor);
-                                            AssemblyFileWriter.appendCommandToData(recordDescriptor.getName(), "space", String.valueOf(4 * recordElements.size()));
-                                        }
-                                    } else {
-                                        SemanticStack.push(o);
-                                    }
+                                    SemanticStack.push(o);
                                 }
                             } catch (Exception e) {
                                 SemanticStack.push(o);
@@ -454,7 +437,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                         } else if (t1 instanceof Type) {
                             Type t = (Type) t1;
                             if (TypeChecker.isArrayType(t)) {
-                                ArrayDescriptor lad = (ArrayDescriptor) SymbolTableStack.top().getDescriptor(name);
+                                ArrayDSCP lad = (ArrayDSCP) SymbolTableStack.top().getDescriptor(name);
                                 lad.setRealName(name);
                             } else {
                                 if (!SymbolTableStack.top().contains(name)) {
@@ -577,45 +560,45 @@ public class CodeGeneratorImp implements CodeGenerator {
                 System.err.println("Compile Error Occurred at line " + (scanner.current_Token.lineNumber + 1));
                 e.printStackTrace();
             }
-        }
-//
-//
-//        Type changeStringToType (String type){
-//            Type res;
-//            switch (type) {
-//                case "bool":
-//                case "int":
-//                    res = Type.INTEGER_NUMBER;
-//                    break;
-//                case "double":
-//                    res = Type.REAL_NUMBER;
-//                    break;
-//                case "string":
-//                    res = Type.STRING;
-//                    break;
-//                default:
-//                    res = null;
-//            }
-//            return res;
-//        }
 
-//        Type changeArrayTypeToElementType (Type arrType){
-//            Type res;
-//            switch (arrType) {
-//                case DOUBLE_ARRAY:
-//                    res = Type.REAL_NUMBER;
-//                    break;
-//                case INT_ARRAY:
-//                    res = Type.INTEGER_NUMBER;
-//                    break;
-//                case STRING_ARRAY:
-//                    res = Type.STRING;
-//                    break;
-//                default:
-//                    res = null;
-//            }
-//            return res;
-//        }
+    }
+    }
+        Type changeStringToType(String type) {
+            Type res;
+            switch (type) {
+                case "bool":
+                case "int":
+                    res = Type.INTEGER_NUMBER;
+                    break;
+                case "double":
+                    res = Type.REAL_NUMBER;
+                    break;
+                case "string":
+                    res = Type.STRING;
+                    break;
+                default:
+                    res = null;
+            }
+            return res;
+        }
+
+        Type changeArrayTypeToElementType (Type arrType){
+            Type res;
+            switch (arrType) {
+                case DOUBLE_ARRAY:
+                    res = Type.REAL_NUMBER;
+                    break;
+                case INT_ARRAY:
+                    res = Type.INTEGER_NUMBER;
+                    break;
+                case STRING_ARRAY:
+                    res = Type.STRING;
+                    break;
+                default:
+                    res = null;
+            }
+            return res;
+        }
     }
         private void debugPrint (String sem){
             System.out.println("sem = " + sem);

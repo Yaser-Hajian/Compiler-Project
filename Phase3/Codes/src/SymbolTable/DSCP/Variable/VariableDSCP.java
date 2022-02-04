@@ -1,12 +1,13 @@
 package SymbolTable.DSCP.Variable;
 
+import CodeGen.Type;
 import SymbolTable.DSCP.Descriptor;
 
 public abstract class VariableDSCP extends Descriptor {
     private String value;
-    private String type;
+    private Type type;
 
-    public VariableDSCP(String name, String type, boolean isLocal) {
+    public VariableDSCP(String name, Type type, boolean isLocal) {
         super(name, type, isLocal);
     }
 
@@ -19,12 +20,12 @@ public abstract class VariableDSCP extends Descriptor {
     }
 
     @Override
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 }

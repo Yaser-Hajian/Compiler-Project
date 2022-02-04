@@ -1,14 +1,17 @@
 package Utils.Type;
 
+import CodeGen.Type;
+import Utils.Errors.TypeError;
+
 public class TypeChecker {
-    public static boolean checkType(String firstType, String secondType, String operation) {
+    public static boolean checkType(Type firstType, Type secondType, String operation) {
         if (firstType == secondType) {
             return true;
         }
         throw new TypeError(operation, firstType, secondType);
     }
 
-    public static boolean isArrayType(String type) {
+    public static boolean isArrayType(Type type) {
         return type == Type.DOUBLE_ARRAY || type == Type.INT_ARRAY || type == Type.STRING_ARRAY;
     }
 

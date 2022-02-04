@@ -1,13 +1,14 @@
 package SymbolTable.DSCP.Array;
 
+import CodeGen.Type;
 import SymbolTable.DSCP.Descriptor;
 
 public abstract class ArrayDSCP extends Descriptor {
     private int size;
     private String realName;
-    private String type;
+    private Type type;
 
-    public ArrayDSCP(String name, String type, boolean isLocal) {
+    public ArrayDSCP(String name, Type type, boolean isLocal) {
         super(name, type, isLocal);
     }
 
@@ -20,7 +21,7 @@ public abstract class ArrayDSCP extends Descriptor {
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -33,7 +34,7 @@ public abstract class ArrayDSCP extends Descriptor {
     }
 
     @Override
-    public String getType() {
+    public Type getType() {
         return type;
     }
 }
