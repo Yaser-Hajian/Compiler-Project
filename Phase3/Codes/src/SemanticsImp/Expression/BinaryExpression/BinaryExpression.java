@@ -200,10 +200,10 @@ public abstract class BinaryExpression extends Expression {
                 divide(firstOperandDes, secondOperandDes, resultType, "div"+ extention, storeCommand, loadCommand, variableName0, variableName1);
                 break;
             case "*":
-                multiply(firstOperandDes, secondOperandDes, resultType, "mul"+ extention, resultType.equals("INTEGER_NUMBER")  ? "sd" : "s.s", loadCommand, variableName0, variableName1);
+                multiply(firstOperandDes, secondOperandDes, resultType, "mul"+ extention, resultType == Type.INTEGER_NUMBER  ? "sd" : "s.s", loadCommand, variableName0, variableName1);
                 break;
             case "%":
-                if(firstOperandDes.getType().equals("INTEGER_NUMBER")  && secondOperandDes.getType().equals("INTEGER_NUMBER")  ) {
+                if(firstOperandDes.getType() == Type.INTEGER_NUMBER  && secondOperandDes.getType() == Type.INTEGER_NUMBER  ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "rem", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 else
@@ -227,42 +227,42 @@ public abstract class BinaryExpression extends Expression {
             // Comparison
             case "==":
 //                generateCompare(firstOperand, secondOperand);
-                if (firstOperandDes.getType().equals("REAL_NUMBER") ){     //TODO (for all). better: firstOperandDes.getType() == secondOperandDes.getType() == Type.REAL_NUMBER
+                if (firstOperandDes.getType() == Type.REAL_NUMBER ){     //TODO (for all). better: firstOperandDes.getType() == secondOperandDes.getType() == Type.REAL_NUMBER
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "c.eq.s", storeCommand, loadCommand, variableName0, variableName1);
                 }
-                else if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                else if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "seq", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 break;
             case "<":
-                if (firstOperandDes.getType().equals("REAL_NUMBER") ){
+                if (firstOperandDes.getType() == Type.REAL_NUMBER ){
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "c.lt.s", storeCommand, loadCommand, variableName0, variableName1);
                 }
-                else if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                else if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "slt", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 break;
             case ">=":
-                if (firstOperandDes.getType().equals("REAL_NUMBER") ){
+                if (firstOperandDes.getType() == Type.REAL_NUMBER ){
                     generate2OperandCommands(secondOperandDes, firstOperandDes, resultType, "c.le.s", storeCommand, loadCommand, variableName0, variableName1);
                 }
-                else if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                else if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "sge", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 break;
             case ">":
-                if (firstOperandDes.getType().equals("REAL_NUMBER") ){
+                if (firstOperandDes.getType() == Type.REAL_NUMBER ){
                     generate2OperandCommands(secondOperandDes, firstOperandDes, resultType, "c.lt.s", storeCommand, loadCommand, variableName0, variableName1);
                 }
-                else if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                else if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "sgt", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 break;
             case "<=":
-                if (firstOperandDes.getType().equals("REAL_NUMBER")){
+                if (firstOperandDes.getType() == Type.REAL_NUMBER){
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "c.le.s", storeCommand, loadCommand, variableName0, variableName1);
                 }
-                else if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                else if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generate2OperandCommands(firstOperandDes, secondOperandDes, resultType, "sle", storeCommand, loadCommand, variableName0, variableName1);
                 }
                 break;
@@ -271,14 +271,14 @@ public abstract class BinaryExpression extends Expression {
                 break;
             // Unary
             case "++":
-                if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generatePlusPlusCommand(firstOperandDes, resultType, "addi");
                 }
                 else
                     throw new TypeError("++", firstOperandDes.getType());
                 break;
             case "--":
-                if(firstOperandDes.getType().equals("INTEGER_NUMBER") ) {
+                if(firstOperandDes.getType() == Type.INTEGER_NUMBER ) {
                     generateMinusMinusCommand(firstOperandDes, resultType, "addi");
                 }
                 else
