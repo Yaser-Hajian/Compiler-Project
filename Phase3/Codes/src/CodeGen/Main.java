@@ -12,13 +12,15 @@ public class Main {
         if (args.length >=6){
             for (int i = 0; i < args.length; i++) {
                 if (args[i].equals("--input")){
-                    inputCollFilePath=args[i+1];
+                    //inputCollFilePath=args[i+1];
+                    inputCollFilePath = "C:\\Users\\USER\\Desktop\\Compiler Project\\ProjectFiles\\codes\\Phase3\\test\\test.cool";
                 }
                 if (args[i].equals("--output")){
-                    outputFilePath = args[i+1];
+                    //outputFilePath = args[i+1];
                 }
                 if (args[i].equals("--table")){
-                    tablePath = args[i+1];
+                    //tablePath = args[i+1];
+                    tablePath = "C:\\Users\\USER\\Desktop\\Compiler Project\\ProjectFiles\\codes\\Phase3\\PGen\\second-edition\\table.nrt";
                 }
             }
         }else {
