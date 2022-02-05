@@ -1,6 +1,7 @@
 package SemanticsImp.Expression.Constants;
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SymbolTable.DSCP.Variable.GlobalVariableDSCP;
 import SymbolTable.DSCP.Variable.VariableDSCP;
 import SymbolTable.GlobalSymbolTable;
@@ -21,7 +22,7 @@ public class IntegerConstant extends ConstantExpression{
         boolean hasDescriptor = descriptor != null;
         if (!hasDescriptor) {
             String variableName = CodeGeneratorImp.getVariableName();
-            descriptor = new GlobalVariableDSCP(variableName, "INTEGER_NUMBER");
+            descriptor = new GlobalVariableDSCP(variableName, Type.INTEGER_NUMBER);
             descriptor.setValue(String.valueOf(intConst));
             AssemblyFileWriter.appendComment("integer constant");
             AssemblyFileWriter.appendCommandToCode("li", "$t0", String.valueOf(intConst));

@@ -10,10 +10,16 @@ public class SemanticStack {
     }
 
     public static Object pop() {
+        if (semanticStack.isEmpty()){
+            return 0;
+        }
         return semanticStack.pop();
     }
 
     public static Object top() {
+        if (semanticStack.isEmpty()){
+            return 0;
+        }
         return semanticStack.peek();
     }
 

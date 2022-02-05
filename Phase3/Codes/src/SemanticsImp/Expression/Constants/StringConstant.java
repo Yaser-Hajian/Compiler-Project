@@ -1,6 +1,7 @@
 package SemanticsImp.Expression.Constants;
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SymbolTable.DSCP.Variable.GlobalVariableDSCP;
 import SymbolTable.DSCP.Variable.VariableDSCP;
 import SymbolTable.GlobalSymbolTable;
@@ -21,7 +22,7 @@ public class StringConstant extends ConstantExpression {
         boolean hasDescriptor = descriptor != null;
         if (!hasDescriptor) {
             String variableName = CodeGeneratorImp.getVariableName();
-            descriptor = new GlobalVariableDSCP(variableName, "STRING");
+            descriptor = new GlobalVariableDSCP(variableName, Type.STRING);
             descriptor.setValue(stringConst);
             SemanticStack.push(descriptor);
             AssemblyFileWriter.appendComment("string constant");

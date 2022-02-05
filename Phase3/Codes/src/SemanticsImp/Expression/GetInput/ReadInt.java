@@ -2,6 +2,7 @@ package SemanticsImp.Expression.GetInput;
 
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SemanticsImp.Expression.Expression;
 import SymbolTable.DSCP.Variable.LocalVariableDSCP;
 import SymbolTable.Stack.SemanticStack;
@@ -19,6 +20,6 @@ public class ReadInt extends Expression {
         AssemblyFileWriter.appendCommandToCode("la", "$t1", variableName);
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", "0($t1)");
         AssemblyFileWriter.appendDebugLine(variableName);
-        SemanticStack.push(new LocalVariableDSCP(variableName, "INTEGER_NUMBER"));
+        SemanticStack.push(new LocalVariableDSCP(variableName, Type.INTEGER_NUMBER));
     }
 }

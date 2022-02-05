@@ -16,5 +16,4 @@ public enum Type {
     INT_ARRAY,
     STRING_ARRAY,
     DOUBLE_ARRAY,
-    RECORD
 }

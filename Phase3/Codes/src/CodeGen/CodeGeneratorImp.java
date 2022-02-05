@@ -424,7 +424,7 @@ public class CodeGeneratorImp implements CodeGenerator {
                 case "addDescriptor":
                     String name = (String) SemanticStack.pop();
                     Object t1 = SemanticStack.pop();
-                    if (t1 instanceof String) { // record
+                    if (t1 instanceof String) {
                         o = null;
                         try {
                             if (!SemanticStack.isEmpty()) {
@@ -541,14 +541,6 @@ public class CodeGeneratorImp implements CodeGenerator {
                     break;
                 case "assignment":
                     new Assignment().compile();
-                    break;
-                case "pushRecordType":
-                    SemanticStack.push((String) scanner.current_Token.value);
-                    break;
-                case "popRecord":
-                    SemanticStack.pop();
-                    SemanticStack.push(str2);
-                    SemanticStack.push(str);
                     break;
                 case "getLen":
                     ArrayDSCP descriptor;

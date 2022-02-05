@@ -1,6 +1,7 @@
 package SemanticsImp.Expression.GetInput;
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SemanticsImp.Expression.Expression;
 import SymbolTable.DSCP.Variable.LocalVariableDSCP;
 import SymbolTable.Stack.SemanticStack;
@@ -16,7 +17,7 @@ public class ReadLine extends Expression {
         AssemblyFileWriter.appendCommandToCode("move", "$t0", "$a0");
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", "stradr");
         String varName = CodeGeneratorImp.getVariableName();
-        LocalVariableDSCP lvd = new LocalVariableDSCP(varName, "STRING");
+        LocalVariableDSCP lvd = new LocalVariableDSCP(varName, Type.STRING);
         AssemblyFileWriter.appendCommandToData(varName, "space", "20");
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", lvd.getName());
         SemanticStack.push(lvd);

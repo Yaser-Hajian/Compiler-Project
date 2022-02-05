@@ -1,6 +1,7 @@
 package SemanticsImp.Expression.GetInput;
 
 import CodeGen.CodeGeneratorImp;
+import CodeGen.Type;
 import SemanticsImp.Expression.Expression;
 import SymbolTable.DSCP.Variable.LocalVariableDSCP;
 import SymbolTable.Stack.SemanticStack;
@@ -18,6 +19,6 @@ public class ReadReal extends Expression {
         AssemblyFileWriter.appendCommandToData(variableName, "word", "0");
         AssemblyFileWriter.appendCommandToCode("la", "$t1", variableName);
         AssemblyFileWriter.appendCommandToCode("s.s", "$f1", "0($t1)");
-        SemanticStack.push(new LocalVariableDSCP(variableName, "REAL_NUMBER"));
+        SemanticStack.push(new LocalVariableDSCP(variableName, Type.REAL_NUMBER));
     }
 }
