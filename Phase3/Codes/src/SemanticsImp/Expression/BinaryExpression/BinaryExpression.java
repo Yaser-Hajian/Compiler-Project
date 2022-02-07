@@ -87,10 +87,6 @@ public abstract class BinaryExpression extends Expression {
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", variableName);
         AssemblyFileWriter.appendDebugLine(variableName);
         SemanticStack.push(new LocalVariableDeclaration(variableName, resultType));
-        /*if (isBeforeExpression){
-        }
-        else {
-        }*/
     }
 
     private void generatePlusPlusCommand(Descriptor firstOperandDes, Type resultType, String operationCommand/*, boolean isBeforeExpression*/) {
@@ -104,10 +100,7 @@ public abstract class BinaryExpression extends Expression {
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", variableName);
         AssemblyFileWriter.appendDebugLine(variableName);
         SemanticStack.push(new LocalVariableDeclaration(variableName, resultType));
-        /*if (isBeforeExpression){
-        }
-        else {
-        }*/
+
     }
 
     private void generateCompare(Descriptor firstOperandDes, Descriptor secondOperandDes) {
@@ -124,7 +117,6 @@ public abstract class BinaryExpression extends Expression {
         AssemblyFileWriter.appendCommandToCode("li", "$t0", "0");
         AssemblyFileWriter.appendCommandToCode("sw", "$t0", variableNameOfContinue);
         AssemblyFileWriter.addLabel(continueLabel);
-//        AssemblyFileWriter.appendDebugLine(variableNameOfContinue);
         SemanticStack.push(new LocalVariableDeclaration(variableNameOfContinue, Type.INTEGER_NUMBER));
     }
 
@@ -180,7 +172,7 @@ public abstract class BinaryExpression extends Expression {
                 variableName1 = "$f1";
                 break;
             case STRING:
-                // extention = "";
+
                 // TODO
                 break;
             default:

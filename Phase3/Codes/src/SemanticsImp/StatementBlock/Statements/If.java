@@ -34,12 +34,12 @@ public class If extends Statement {
     public static void elseCode() {
         AssemblyFileWriter.appendComment("else code");
         AssemblyFileWriter.deleteLabel(afterIfLabel);
-        AssemblyFileWriter.addLabel(afterIfLabel);
+        AssemblyFileWriter.addLabel(afterElseLabel);
     }
 
     public static void completeElse() {
         AssemblyFileWriter.appendComment("complete else code");
         AssemblyFileWriter.deleteLabel(afterElseLabel);
-        AssemblyFileWriter.addLabel(afterElseLabel);
+        AssemblyFileWriter.addLabel(afterIfLabel);
     }
 }

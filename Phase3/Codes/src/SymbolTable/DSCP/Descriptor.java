@@ -44,8 +44,7 @@ public abstract class Descriptor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Descriptor that = (Descriptor) o;
-        return isLocal == that.isLocal &&
-                Objects.equals(addressName, that.addressName) &&
+        return Objects.equals(addressName, that.addressName) &&
                 type == that.type;
     }
 

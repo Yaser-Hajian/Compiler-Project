@@ -9,16 +9,13 @@ import SemanticsImp.Expression.Constants.RealConstant;
 import SemanticsImp.Expression.Constants.StringConstant;
 import SemanticsImp.Expression.GetInput.ReadInt;
 import SemanticsImp.Expression.GetInput.ReadLine;
-import SemanticsImp.Expression.GetInput.ReadReal;
 import SemanticsImp.Expression.UnaryExp.Arithmetic.MinusMinus;
 import SemanticsImp.Expression.UnaryExp.Arithmetic.PlusPlus;
 import SemanticsImp.Expression.UnaryExp.Logical.Not;
 import SemanticsImp.StatementBlock.Statements.*;
 import SymbolTable.DSCP.Array.ArrayDSCP;
-import SymbolTable.DSCP.Array.GlobalArrayDSCP;
 import SymbolTable.DSCP.Array.LocalArrayDSCP;
 import SymbolTable.DSCP.Descriptor;
-import SymbolTable.DSCP.Variable.GlobalVariableDSCP;
 import SymbolTable.DSCP.Variable.LocalVariableDSCP;
 import SymbolTable.DSCP.Variable.VariableDSCP;
 import SymbolTable.GlobalSymbolTable;
@@ -29,8 +26,6 @@ import Utils.DescriptorChecker;
 import Utils.Errors.CastError;
 import Utils.Errors.NameError;
 import Utils.Type.TypeChecker;
-
-import java.util.ArrayList;
 
 public class CodeGeneratorImp implements CodeGenerator {
     private static My_Scanner scanner;
@@ -95,16 +90,16 @@ public class CodeGeneratorImp implements CodeGenerator {
                     System.out.println("code gen of multiply");
                     break;
                 case "div":
+                    System.out.println("code gen of division");
                     secondOperand = (Descriptor) SemanticStack.pop();
                     firstOperand = (Descriptor) SemanticStack.pop();
                     new Divide(firstOperand, secondOperand).compile();
-                    System.out.println("code gen of division");
                     break;
                 case "remainder":
+                    System.out.println("code gen of remainder");
                     secondOperand = (Descriptor) SemanticStack.pop();
                     firstOperand = (Descriptor) SemanticStack.pop();
                     new Remainder(firstOperand, secondOperand).compile();
-                    System.out.println("code gen of remainder");
                     break;
                 case "nor":
                     secondOperand = (Descriptor) SemanticStack.pop();
@@ -235,22 +230,6 @@ public class CodeGeneratorImp implements CodeGenerator {
                         }
                     }
                     break;
-                case "arrayDclGlobal":
-                    DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
-                    arrType = (Type) SemanticStack.top();
-                    if (!GlobalSymbolTable.getSymbolTable().contains((String) scanner.current_Token.value)) {
-                        GlobalArrayDSCP lad = new GlobalArrayDSCP(getVariableName(), arrType);
-                        GlobalSymbolTable.getSymbolTable().addDescriptor((String) scanner.current_Token.value, lad);
-//                    AssemblyFileWriter.appendCommandToData(lad.getName(), "word", "0");
-                        SemanticStack.push((String) scanner.current_Token.value);
-                    } else {
-                        try {
-                            throw new NameError((String) scanner.current_Token.value, true);
-                        } catch (Exception e) {
-                            System.err.println(e.getMessage());
-                        }
-                    }
-                    break;
                 case "setArrayDescriptor":
                     Type newArrayType = (Type) SemanticStack.pop();
                     VariableDSCP sizeDescriptor = (VariableDSCP) SemanticStack.pop();
@@ -360,9 +339,6 @@ public class CodeGeneratorImp implements CodeGenerator {
                 case "readLine":
                     new ReadLine().compile();
                     break;
-                case "readReal":
-                    new ReadReal().compile();
-                    break;
                 case "returnStatement":
                     new Return((Descriptor) SemanticStack.pop()).compile();
                     break;
@@ -389,16 +365,9 @@ public class CodeGeneratorImp implements CodeGenerator {
                     break;
                 case "pushIdDcl":
                     DescriptorChecker.checkNotContainsDescriptor((String) scanner.current_Token.value);
-                    DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
-
-                    SemanticStack.push((String) scanner.current_Token.value);
-                    break;
-                case "pushIdDclGlobal":
-                    DescriptorChecker.checkNotContainsDescriptorGlobal((String) scanner.current_Token.value);
                     SemanticStack.push((String) scanner.current_Token.value);
                     break;
                 case "pushId":
-
                     if (!SymbolTableStack.isEmpty() && SymbolTableStack.top().contains((String) scanner.current_Token.value))
                         SemanticStack.push(SymbolTableStack.top().getDescriptor((String) scanner.current_Token.value));
                     else {
@@ -459,31 +428,6 @@ public class CodeGeneratorImp implements CodeGenerator {
                         }
                     }
                     break;
-                case "addDescriptorGlobal":
-                    name = (String) SemanticStack.pop();
-                    Type t = (Type) SemanticStack.pop();
-                    if (TypeChecker.isArrayType(t)) {
-                        GlobalArrayDSCP lad = new GlobalArrayDSCP(getVariableName(), t);
-                        lad.setRealName(name);
-                        GlobalSymbolTable.getSymbolTable().addDescriptor(name, lad);
-                    } else {
-                        if (!GlobalSymbolTable.getSymbolTable().contains(name)) {
-                            GlobalVariableDSCP gvd = new GlobalVariableDSCP(getVariableName(), t);
-                            GlobalSymbolTable.getSymbolTable().addDescriptor(name, gvd);
-                            if (t != Type.STRING) {
-                                AssemblyFileWriter.appendCommandToData(gvd.getName(), "word", "0");
-                            } else {
-                                AssemblyFileWriter.appendCommandToData(gvd.getName(), "space", "20");
-                            }
-                        } else {
-                            try {
-                                throw new NameError(name, true);
-                            } catch (Exception e2) {
-                                System.err.println(e2.getMessage());
-                            }
-                        }
-                    }
-                    break;
                 case "cast":
                     des = (Descriptor) SemanticStack.pop();
                     type = (Type) SemanticStack.pop();
@@ -523,20 +467,6 @@ public class CodeGeneratorImp implements CodeGenerator {
                     firstOperand = (Descriptor) SemanticStack.pop();
                     SemanticStack.push(firstOperand);
                     new Divide(firstOperand, secondOperand).compile();
-                    new Assignment().compile();
-                    break;
-                case "andAssign":
-                    secondOperand = (Descriptor) SemanticStack.pop();
-                    firstOperand = (Descriptor) SemanticStack.pop();
-                    SemanticStack.push(firstOperand);
-                    new And(firstOperand, secondOperand).compile();
-                    new Assignment().compile();
-                    break;
-                case "orAssign":
-                    secondOperand = (Descriptor) SemanticStack.pop();
-                    firstOperand = (Descriptor) SemanticStack.pop();
-                    SemanticStack.push(firstOperand);
-                    new Or(firstOperand, secondOperand).compile();
                     new Assignment().compile();
                     break;
                 case "assignment":
